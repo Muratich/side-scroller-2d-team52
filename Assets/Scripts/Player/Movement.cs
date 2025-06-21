@@ -29,10 +29,10 @@ public class Movement : MonoBehaviour {
     public Transform groundOrigin2;
 
 
-    // Components
-    private Rigidbody2D rb;
-    private InputHandler input;
-
+    [Header("Components")]
+    public Rigidbody2D rb;
+    public InputHandler input;
+    public Animator animator;
 
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -63,9 +63,11 @@ public class Movement : MonoBehaviour {
                 velocity = Mathf.MoveTowards(velocity, speed * direction * (isGrounded ? 1 : airSpeedMod),
                                             acceleration * Time.fixedDeltaTime * (isGrounded ? 1 : airAccelerationMod));
             }
+            animator.SetBool("move", true);
         }
         else {
             velocity = Mathf.MoveTowards(velocity, 0, deceleration * Time.fixedDeltaTime);
+            animator.SetBool("move", false);
         }
         rb.linearVelocity = new Vector2(velocity, rb.linearVelocity.y);
     }
