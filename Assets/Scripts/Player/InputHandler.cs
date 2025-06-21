@@ -1,0 +1,33 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class InputHandler : MonoBehaviour {
+    private Control controls = null;
+    [HideInInspector] public Vector2 movement = Vector2.zero;
+    [HideInInspector] public float jumpPressTime = float.NegativeInfinity;
+    [HideInInspector] public float jumpStartTime = float.NegativeInfinity;
+
+    void Awake() => controls = new Control();
+
+    void OnMovePerformed(InputAction.CallbackContext value) => movement = value.ReadValue<Vector2>();
+    void OnMoveCanceled(InputAction.CallbackContext value) => movement = Vector2.zero;
+
+    void JumpPress(InputAction.CallbackContext value) => jumpPressTime = Time.time;
+    void JumpRelease(InputAction.CallbackContext value) => jumpPressTime = jumpStartTime = float.NegativeInfinity;
+
+    private void OnEnable() {
+        controls.Enable();
+        controls.Player.Move.performed += OnMovePerformed;
+        controls.Player.Move.canceled += OnMoveCanceled;
+        controls.Player.Jump.performed += JumpPress;
+        controls.Player.Jump.canceled += JumpRelease;
+    }
+
+    private void OnDisable() {
+        controls.Disable();
+        controls.Player.Move.performed -= OnMovePerformed;
+        controls.Player.Move.canceled -= OnMoveCanceled;
+        controls.Player.Jump.performed -= JumpPress;
+        controls.Player.Jump.canceled -= JumpRelease;
+    }
+}
