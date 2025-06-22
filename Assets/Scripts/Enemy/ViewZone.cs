@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using Unity.VisualScripting;
-using UnityEditor.Rendering;
-using UnityEngine.Rendering;
 
 public class ViewZone : MonoBehaviour {
     [Header("Characteristics")]

@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.EditorTools;
 
 public class EnemyPatternMovement : MonoBehaviour {
     [Tooltip("The points where the enemy will move sequentially")]

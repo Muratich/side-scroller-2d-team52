@@ -247,6 +247,8 @@ MonoBehaviour:
   rb: {fileID: 5737737874782232817}
   input: {fileID: 8148346314618238991}
   animator: {fileID: 7687059470012437735}
+  jumpSound: {fileID: 2853179998572147632, guid: 30a8b95ab6651684dbf1429399e9799b, type: 3}
+  landSound: {fileID: 6837455060397235548, guid: 6ef1c8a7a63e75e45a5900577918580f, type: 3}
 --- !u!114 &3028687879752967258
 MonoBehaviour:
   m_ObjectHideFlags: 0
