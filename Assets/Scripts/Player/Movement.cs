@@ -34,6 +34,10 @@ public class Movement : MonoBehaviour {
     public InputHandler input;
     public Animator animator;
 
+    [Header("Sounds & Effects")]
+    public GameObject jumpSound;
+    public GameObject landSound;
+
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<InputHandler>();
@@ -79,6 +83,7 @@ public class Movement : MonoBehaviour {
             input.jumpStartTime = Time.fixedTime;
             lastGroundedTime = float.NegativeInfinity;
             isGrounded = false;
+            Destroy(Instantiate(jumpSound), 1f);
         }
     }
 
@@ -92,5 +97,11 @@ public class Movement : MonoBehaviour {
     public void Knockback() {
         direction = Mathf.Sign(input.movement.x);
         rb.linearVelocity = new Vector2(knockbackPower * -direction, jumpVelocity * 0.5f);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.layer == LayerMask.GetMask("Ground")) {
+            Destroy(Instantiate(landSound), 1f);
+        }
     }
 }
