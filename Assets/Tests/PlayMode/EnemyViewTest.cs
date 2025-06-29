@@ -1,19 +1,20 @@
+using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class EnemyViewTest
-{
+public class EnemyViewTest {
     private GameObject enemyObj;
     private GameObject playerObj;
     private ViewZone viewZone;
     private TestEnemyAttack testAttack;
 
     [SetUp]
-    public void Setup()
-    {
-        // Create a mock enemy with ViewZone and EnemyAttack
+    public void SetUp() {
         enemyObj = new GameObject("Enemy");
+        var collider = enemyObj.AddComponent<CircleCollider2D>();
+        collider.isTrigger = true;
+
         viewZone = enemyObj.AddComponent<ViewZone>();
         testAttack = enemyObj.AddComponent<TestEnemyAttack>();
         viewZone.enemyAttack = testAttack;
@@ -21,35 +22,51 @@ public class EnemyViewTest
         viewZone.viewRadius = 10f;
         viewZone.viewAngle = 180f;
         viewZone.targetMask = LayerMask.GetMask("Player");
+        viewZone.barrierMask = 0;
+        viewZone.rayOriginOffset = Vector2.zero;
 
-        // Create a mock player
+        // Player setup
         playerObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
         playerObj.name = "Player";
         playerObj.layer = LayerMask.NameToLayer("Player");
         playerObj.transform.position = enemyObj.transform.position + Vector3.right * 5f;
     }
 
-    [Test]
-    public void EnemyStartsAttackWhenPlayerInView()
-    {
-        // Simulate player entering view
+    [UnityTest]
+    public IEnumerator EnemyStartsAttackWhenPlayerInView() {
+        yield return null;
+
         viewZone.InitializationOfTargets();
         viewZone.CheckVisibleTargets();
 
-        // Assert that attack was triggered
+        Assert.IsTrue(testAttack.WasStartAttackCalled, "Enemy should start attack when player is in view");
+
+        yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator EnemyStopsAttackWhenPlayerLeavesView() {
+        yield return null;
+        viewZone.InitializationOfTargets();
+        viewZone.CheckVisibleTargets();
         Assert.IsTrue(testAttack.WasStartAttackCalled);
+
+        playerObj.transform.position = enemyObj.transform.position + Vector3.right * 20f;
+        viewZone.InitializationOfTargets();
+        viewZone.CheckVisibleTargets();
+
+        Assert.IsFalse(testAttack.WasStartAttackCalled, "Enemy should stop attack when player leaves view");
+
+        yield return null;
     }
 
     [TearDown]
-    public void Teardown()
-    {
+    public void TearDown() {
         Object.DestroyImmediate(enemyObj);
         Object.DestroyImmediate(playerObj);
     }
 
-    // Test double for EnemyAttack
-    private class TestEnemyAttack : EnemyAttack
-    {
+    private class TestEnemyAttack : EnemyAttack {
         public bool WasStartAttackCalled { get; private set; }
 
         public override void StartAttack(Transform target)
