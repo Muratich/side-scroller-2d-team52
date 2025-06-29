@@ -32,7 +32,7 @@ public class ViewZone : MonoBehaviour {
 
     private void OnDisable() => StopAllCoroutines();
 
-    private void InitializationOfTargets() {
+    public void InitializationOfTargets() {
         Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)transform.position, viewRadius, targetMask);
         foreach (Collider2D hit in hits) {
             if (!targetsInRange.Contains(hit.transform)) {
@@ -71,7 +71,7 @@ public class ViewZone : MonoBehaviour {
         }
     }
 
-    private void CheckVisibleTargets() {
+    public void CheckVisibleTargets() {
         visibleTargets.Clear();
         Vector2 origin = (Vector2)transform.position + rayOriginOffset;
         for (int i = targetsInRange.Count - 1; i >= 0; i--) {
