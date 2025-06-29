@@ -1,7 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Movement : MonoBehaviour {
+public class Movement : NetworkBehaviour {
     [HideInInspector] public bool control; // Variable for pauses/cutscenes (turn on/off) movement
 
     [Header("Movement")]
@@ -38,22 +38,31 @@ public class Movement : MonoBehaviour {
     public GameObject jumpSound;
     public GameObject landSound;
 
+    [Header("Camera")]
+    public GameObject cameraPrefab;
+    private CameraFollow myCameraFollow;
+
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<InputHandler>();
         control = true;
     }
 
+    public override void OnNetworkSpawn() {
+        enabled = IsOwner;
+    }
+
     private void FixedUpdate() {
-        if (control) {
-            GroundCheck();
-            Move();
-            Jump();
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -maxFallingSpeed));
-        }
-        else {
+        if (!control) {
             rb.linearVelocity = Vector2.zero;
+            return;
         }
+
+        GroundCheck();
+        Move();
+        Jump();
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -maxFallingSpeed));
+        
     }
 
     private void Move() {

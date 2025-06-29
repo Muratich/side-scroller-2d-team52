@@ -1,13 +1,37 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputHandler : MonoBehaviour {
+public class InputHandler : NetworkBehaviour  {
     private Control controls = null;
     [HideInInspector] public Vector2 movement = Vector2.zero;
     [HideInInspector] public float jumpPressTime = float.NegativeInfinity;
     [HideInInspector] public float jumpStartTime = float.NegativeInfinity;
 
     void Awake() => controls = new Control();
+    public override void OnNetworkSpawn() {
+        if (IsOwner) {
+            controls.Enable();
+            controls.Player.Move.performed += OnMovePerformed;
+            controls.Player.Move.canceled  += OnMoveCanceled;
+            controls.Player.Jump.performed += JumpPress;
+            controls.Player.Jump.canceled += JumpRelease;
+        } else {
+            controls.Disable();
+        }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        if (IsOwner)
+        {
+            controls.Player.Move.performed -= OnMovePerformed;
+            controls.Player.Move.canceled  -= OnMoveCanceled;
+            controls.Player.Jump.performed -= JumpPress;
+            controls.Player.Jump.canceled  -= JumpRelease;
+            controls.Disable();
+        }
+    }
 
     void OnMovePerformed(InputAction.CallbackContext value) => movement = value.ReadValue<Vector2>();
     void OnMoveCanceled(InputAction.CallbackContext value) => movement = Vector2.zero;
