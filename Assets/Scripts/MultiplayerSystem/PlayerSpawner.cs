@@ -29,10 +29,15 @@ public class PlayerSpawner : MonoBehaviour {
 
     private void SpawnForClient(ulong clientId) {
         if (playerPrefab == null) { Debug.Log("Player prefab not set!"); return; }
-        
-        Transform spawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
-        GameObject go = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
-        var netObj = go.GetComponent<NetworkObject>();
+
+        Vector3 spawnPoint;
+        GameObject spObj = GameObject.FindGameObjectWithTag("Respawn");
+
+        if (spObj == null) { Debug.Log("Spawn point not found on scene!");  spawnPoint = new Vector3(0, 0, 0); }
+        else spawnPoint = spObj.transform.position;
+
+        GameObject go = Instantiate(playerPrefab, spawnPoint, Quaternion.identity);
+        if (!go.TryGetComponent<NetworkObject>(out NetworkObject netObj)) { Debug.Log("Player has not NetworkObject!");  return; }
         netObj.SpawnAsPlayerObject(clientId, true);
     }
 }
