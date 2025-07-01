@@ -316,6 +316,8 @@ MonoBehaviour:
   airAccelerationMod: 1
   maxFallingSpeed: 45
   knockbackPower: 10
+  isMoving:
+    m_InternalValue: 0
   jumpVelocity: 14
   jumpBufferTime: 0.1
   groundOrigin1: {fileID: 2440830237988990864}
@@ -323,9 +325,11 @@ MonoBehaviour:
   rb: {fileID: 5737737874782232817}
   input: {fileID: 8148346314618238991}
   animator: {fileID: 7687059470012437735}
+  health: {fileID: 3028687879752967258}
   jumpSound: {fileID: 2853179998572147632, guid: 30a8b95ab6651684dbf1429399e9799b, type: 3}
   landSound: {fileID: 6837455060397235548, guid: 6ef1c8a7a63e75e45a5900577918580f, type: 3}
   cameraPrefab: {fileID: 9194388753394867587, guid: c77354e6fe31ba34681b0673f3fcc559, type: 3}
+  healthUIPrefab: {fileID: 1059374936457149010, guid: 4e0ed0ef0e0786f49aad3b5b5d893d09, type: 3}
 --- !u!114 &3028687879752967258
 MonoBehaviour:
   m_ObjectHideFlags: 0

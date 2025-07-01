@@ -1,17 +1,12 @@
 using UnityEngine;
 
 public class HealthUI : MonoBehaviour {
-    [SerializeField] public string targetTag;
     private Health health;
     public Transform healthBar;
     public GameObject healthPrefab;
 
-    void Awake() {
-        health = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Health>();
-        if (health == null) {
-            Debug.LogError("Target object with Health component has not founded!");
-            return;
-        }
+    public void Init(Health target) {
+        health = target;
         ClearBar();
         SetHealthUI(health.health);
         health.onDamage?.AddListener(onHealthChangeHandler);

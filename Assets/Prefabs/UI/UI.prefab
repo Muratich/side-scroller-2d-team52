@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2598934356778559939}
   - component: {fileID: 5750713484092683117}
   - component: {fileID: 4334327106885095464}
+  - component: {fileID: 1943127872786997394}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -117,6 +118,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50da9a0d8ea30d34090ed00fa04d41ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1943127872786997394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059374936457149010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ce5fb1d9a3c9942bf1b93dac9471f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 735542214936514173}
+  healthPrefab: {fileID: 6189966119323798434, guid: ccff859519e1b3040ac7c0c8cace4688, type: 3}
 --- !u!1 &3557303972014842203
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +360,7 @@ GameObject:
   - component: {fileID: 4319852886257731725}
   - component: {fileID: 79518508757886315}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,7 +470,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4334327106885095464}
         m_TargetAssemblyTypeName: InGameSettings, Assembly-CSharp
-        m_MethodName: Menu
+        m_MethodName: DisconnectToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -477,7 +492,6 @@ GameObject:
   - component: {fileID: 5203258487026205049}
   - component: {fileID: 175761480292967351}
   - component: {fileID: 8313368866198696939}
-  - component: {fileID: 647117898382514924}
   m_Layer: 5
   m_Name: Healthbar
   m_TagString: Untagged
@@ -566,18 +580,3 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &647117898382514924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9172776836912656230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4ce5fb1d9a3c9942bf1b93dac9471f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTag: Player
-  healthBar: {fileID: 735542214936514173}
-  healthPrefab: {fileID: 6189966119323798434, guid: ccff859519e1b3040ac7c0c8cace4688, type: 3}

@@ -35,14 +35,12 @@ public class LobbyManager : MonoBehaviour {
 
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
-        SceneManager.sceneLoaded += OnLoadComplete;
     }
 
     private void OnDestroy() {
         if (NetworkManager.Singleton == null) return;
         NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
-        SceneManager.sceneLoaded -= OnLoadComplete;
     }
 
     public void OnHostButtonClicked() => NetworkManager.Singleton.StartHost();
@@ -78,25 +76,5 @@ public class LobbyManager : MonoBehaviour {
 
     private void OnStartGameClicked() {
         NetworkManager.Singleton.SceneManager.LoadScene("Level_1", UnityEngine.SceneManagement.LoadSceneMode.Single);
-    }
-
-    private void OnLoadComplete(Scene scene, LoadSceneMode mode) {
-        if (!NetworkManager.Singleton.IsServer) return;
-        if (scene.name != "Level_1") return;
-
-        foreach (var kvp in NetworkManager.Singleton.ConnectedClients) {
-            ulong id = kvp.Key;
-
-            Transform spawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
-            GameObject go = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
-            var netObj = go.GetComponent<NetworkObject>();
-            if (netObj == null) {
-                Debug.LogError("playerPrefab не содержит NetworkObject!");
-                Destroy(go);
-                continue;
-            }
-
-            netObj.SpawnAsPlayerObject(clientId: id);
-        }
     }
 }
