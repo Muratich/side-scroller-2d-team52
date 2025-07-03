@@ -14,6 +14,7 @@ public class Movement : NetworkBehaviour {
     public float knockbackPower = 10;
     private float direction = 1f;
     private float velocity;
+    public NetworkVariable<bool> isMoving = new NetworkVariable<bool>(writePerm: NetworkVariableWritePermission.Owner);
 
 
     [Header("Jump")]
@@ -33,6 +34,7 @@ public class Movement : NetworkBehaviour {
     public Rigidbody2D rb;
     public InputHandler input;
     public Animator animator;
+    public Health health;
 
     [Header("Sounds & Effects")]
     public GameObject jumpSound;
@@ -41,18 +43,30 @@ public class Movement : NetworkBehaviour {
     [Header("Camera")]
     public GameObject cameraPrefab;
     private CameraFollow myCameraFollow;
+    public GameObject healthUIPrefab;
 
     void Awake() {
+        if (rb == null || input == null || animator == null || health == null) Debug.Log("Not all components was added to player!");
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<InputHandler>();
         control = true;
     }
 
     public override void OnNetworkSpawn() {
-        enabled = IsOwner;
+        if (IsOwner) {
+            GameObject cam = Instantiate(cameraPrefab);
+            myCameraFollow = cam.GetComponent<CameraFollow>();
+            myCameraFollow.SetTarget(transform);
+
+            HealthUI healthUI = Instantiate(healthUIPrefab, Vector3.zero, Quaternion.identity).GetComponent<HealthUI>();
+            healthUI.Init(health);
+        }
+        isMoving.OnValueChanged += (oldVal, newVal) => { animator.SetBool("move", newVal); };
     }
 
     private void FixedUpdate() {
+        if (!IsOwner) return;
+
         if (!control) {
             rb.linearVelocity = Vector2.zero;
             return;
@@ -67,6 +81,8 @@ public class Movement : NetworkBehaviour {
 
     private void Move() {
         velocity = rb.linearVelocity.x;
+        isMoving.Value = input.movement.x != 0;
+
         if (input.movement.x != 0) {
             direction = Mathf.Sign(input.movement.x);
             Vector3 scale = transform.localScale;
