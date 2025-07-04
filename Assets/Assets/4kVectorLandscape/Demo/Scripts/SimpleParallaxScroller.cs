@@ -22,11 +22,9 @@ namespace CodeRedCat._4kVectorLandscape.Demo.Scripts
         private Transform _camTransRef;
         private Vector2 _lastCamPosition;
 
-        // Start is called before the first frame update
-        void Start()
-        {
+        public void Init(Camera camera) {
             Transform originalTransform = transform.GetChild(0);
-            _camTransRef = Camera.main.transform;
+            _camTransRef = camera.transform;
             _lastCamPosition = _camTransRef.position;
         
             GetImageDistance();

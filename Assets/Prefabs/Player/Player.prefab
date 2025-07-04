@@ -205,7 +205,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &3875003138676176015
@@ -329,7 +329,10 @@ MonoBehaviour:
   jumpSound: {fileID: 2853179998572147632, guid: 30a8b95ab6651684dbf1429399e9799b, type: 3}
   landSound: {fileID: 6837455060397235548, guid: 6ef1c8a7a63e75e45a5900577918580f, type: 3}
   cameraPrefab: {fileID: 9194388753394867587, guid: c77354e6fe31ba34681b0673f3fcc559, type: 3}
+  myCameraFollow: {fileID: 0}
+  healthUI: {fileID: 0}
   healthUIPrefab: {fileID: 1059374936457149010, guid: 4e0ed0ef0e0786f49aad3b5b5d893d09, type: 3}
+  paralaxPrefab: {fileID: 2481891452401420464, guid: 336d0df6fa422af4297baac9c95a51ab, type: 3}
 --- !u!114 &3028687879752967258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e0e4897c9f36348b4ed38768cccf41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 9
+  ShowTopMostFoldoutHeaderGroup: 1
+  startHealth: 9
   onDamage:
     m_PersistentCalls:
       m_Calls:
@@ -377,6 +381,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   invisibilityTime: 0.5
+  CurrentHealth:
+    m_InternalValue: 0
 --- !u!50 &5737737874782232817
 Rigidbody2D:
   serializedVersion: 5

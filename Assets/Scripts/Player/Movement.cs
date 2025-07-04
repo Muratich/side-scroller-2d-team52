@@ -1,3 +1,4 @@
+using CodeRedCat._4kVectorLandscape.Demo.Scripts;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -42,8 +43,10 @@ public class Movement : NetworkBehaviour {
 
     [Header("Camera")]
     public GameObject cameraPrefab;
-    private CameraFollow myCameraFollow;
+    [HideInInspector] public CameraFollow myCameraFollow;
+    [HideInInspector] public HealthUI healthUI;
     public GameObject healthUIPrefab;
+    public GameObject paralaxPrefab;
 
     void Awake() {
         if (rb == null || input == null || animator == null || health == null) Debug.Log("Not all components was added to player!");
@@ -53,13 +56,20 @@ public class Movement : NetworkBehaviour {
     }
 
     public override void OnNetworkSpawn() {
-        if (IsOwner) {
+        if (IsLocalPlayer) {
             GameObject cam = Instantiate(cameraPrefab);
             myCameraFollow = cam.GetComponent<CameraFollow>();
             myCameraFollow.SetTarget(transform);
 
-            HealthUI healthUI = Instantiate(healthUIPrefab, Vector3.zero, Quaternion.identity).GetComponent<HealthUI>();
+            healthUI = Instantiate(healthUIPrefab, Vector3.zero, Quaternion.identity).GetComponent<HealthUI>();
             healthUI.Init(health);
+
+            if (paralaxPrefab == null) { Debug.Log("Paralax not set!"); return; }
+
+            GameObject paralaxObj = Instantiate(paralaxPrefab, transform.position, Quaternion.identity);
+            foreach (SimpleParallaxScroller sp in paralaxObj.GetComponentsInChildren<SimpleParallaxScroller>()) {
+                sp.Init(cam.GetComponent<Camera>());
+            }
         }
         isMoving.OnValueChanged += (oldVal, newVal) => { animator.SetBool("move", newVal); };
     }
