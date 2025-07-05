@@ -320,7 +320,7 @@ MonoBehaviour:
   knockbackPower: 10
   isMoving:
     m_InternalValue: 0
-  jumpVelocity: 14
+  jumpVelocity: 17
   jumpBufferTime: 0.1
   groundOrigin1: {fileID: 2440830237988990864}
   groundOrigin2: {fileID: 5656221006104033401}
@@ -550,7 +550,6 @@ MonoBehaviour:
   dropPoint: {fileID: 4566831523506261908}
   scaleRef: {fileID: 4522912684144102725}
   currentWeapon: {fileID: 0}
-  dropPrefabRef: {fileID: 0}
 --- !u!1 &6127185495392868427
 GameObject:
   m_ObjectHideFlags: 0

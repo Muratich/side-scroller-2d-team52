@@ -1,6 +1,8 @@
 using System.Collections;
 using TMPro;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +13,7 @@ public class LobbyManager : MonoBehaviour {
     public GameObject lobbyPanel;
 
     [Header("UI Elements")]
+    public TMP_InputField inputField;
     public TMP_Text statusText;
     public Button startGameButton;
     public Button hostButton;
@@ -18,9 +21,17 @@ public class LobbyManager : MonoBehaviour {
 
     [Header("Player")]
     public GameObject playerPrefab;
+    public ushort port = 777;
+    private UnityTransport utp;
 
     private void Start() {
         DontDestroyOnLoad(gameObject);
+        utp = NetworkManager.Singleton.GetComponent<UnityTransport>();
+        if (inputField != null) inputField.text = "127.0.0.1";
+        if (utp == null) {
+            Debug.LogError("Did not founded UnityTransport on NetworkManager");
+            return;
+        }
         if (NetworkManager.Singleton == null) {
             Debug.LogError("NetworkManager не найден в сцене!");
             return;
@@ -43,8 +54,29 @@ public class LobbyManager : MonoBehaviour {
         NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
     }
 
-    public void OnHostButtonClicked() => NetworkManager.Singleton.StartHost();
-    public void OnClientButtonClicked() => NetworkManager.Singleton.StartClient();
+    void ConfigureTransport(string connectAddress, ushort port, string listenAddress = null) {
+        utp.SetConnectionData(connectAddress, port, listenAddress);
+    }
+
+    public void OnHostButtonClicked() {
+        string localIP = inputField.text;
+        if (string.IsNullOrEmpty(localIP)) {
+            Debug.LogError("Enter LAN!");
+            return;
+        }
+        ConfigureTransport(localIP, port, "0.0.0.0");
+        NetworkManager.Singleton.StartHost();
+    }
+    
+    public void OnClientButtonClicked() {
+        string hostIP = inputField.text;
+        if (string.IsNullOrEmpty(hostIP)) {
+            Debug.LogError("Enter host IP!");
+            return;
+        }
+        ConfigureTransport(hostIP, port);
+        NetworkManager.Singleton.StartClient();
+    }
 
     private void OnClientConnected(ulong clientId) {
         if (clientId == NetworkManager.Singleton.LocalClientId) {
