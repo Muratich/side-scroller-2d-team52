@@ -1,8 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 
-public class EnemyPatternMovement : MonoBehaviour {
+public class EnemyPatternMovement : NetworkBehaviour {
     [Tooltip("The points where the enemy will move sequentially")]
     public List<Transform> destinationPoints;
 
@@ -17,7 +18,10 @@ public class EnemyPatternMovement : MonoBehaviour {
     public ViewZone viewZone;
 
 
-    void Awake() {
+    public void Init(List<Transform> _destinationPoints) {
+        if (!IsServer) return;
+        destinationPoints = _destinationPoints;
+        if (destinationPoints == null) Debug.LogError("Destination points not given!");
         if (rb == null) Debug.LogError("Rigidbody2D was not added to:" + gameObject.name);
         if (animator == null) Debug.LogError("Animator was not added to:" + gameObject.name);
         if (viewZone == null) Debug.LogError("ViewZone was not added to:" + gameObject.name);
