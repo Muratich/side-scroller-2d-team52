@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2900234432447064114, guid: f552a73855b9b3143904efc8a08479be, type: 3}
       propertyPath: m_Name
-      value: PlayerBlue Variant
+      value: PlayerBlue
       objectReference: {fileID: 0}
     - target: {fileID: 3875003138676176015, guid: f552a73855b9b3143904efc8a08479be, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4250784076
+      value: 1664224194
       objectReference: {fileID: 0}
     - target: {fileID: 3875003138676176015, guid: f552a73855b9b3143904efc8a08479be, type: 3}
       propertyPath: SceneMigrationSynchronization

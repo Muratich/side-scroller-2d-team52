@@ -112,9 +112,13 @@ GameObject:
   - component: {fileID: 5897705169617958356}
   - component: {fileID: 5794872387081643097}
   - component: {fileID: 1418048290153868270}
+  - component: {fileID: 8770901439195514026}
+  - component: {fileID: 7780270737810758694}
+  - component: {fileID: 34913074077376750}
+  - component: {fileID: 5376659242485374841}
   m_Layer: 7
   m_Name: Sniper (enemy)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -411,3 +415,97 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   TransitionStateInfoList: []
   m_Animator: {fileID: 7361631085288405772}
+--- !u!114 &8770901439195514026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602361522707910691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e0e4897c9f36348b4ed38768cccf41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  startHealth: 3
+  onDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5376659242485374841}
+        m_TargetAssemblyTypeName: SpawnEffect, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 34913074077376750}
+        m_TargetAssemblyTypeName: WhiteShade, Assembly-CSharp
+        m_MethodName: Shade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
+  invisibilityTime: 0.2
+  CurrentHealth:
+    m_InternalValue: 0
+--- !u!114 &7780270737810758694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602361522707910691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e733697e2482945b84845b340f0c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  health: {fileID: 8770901439195514026}
+  networkObject: {fileID: -214466813311987268}
+--- !u!114 &34913074077376750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602361522707910691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9b412faa6b3594488115b596a24c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 3043462408650588867}
+  shadeColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &5376659242485374841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602361522707910691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e440f2610c570e4d8b834b408f9822f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  origin: {fileID: 8285351183051737761}
+  effect: {fileID: 1922635815742165798, guid: 55835ad82caca454299f92241e124906, type: 3}
+  lifetime: 1

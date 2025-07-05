@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour {
     public void SpawnAll() {
         foreach (EnemySpawnInfo info in enemiesInfo) {
             var enemy = Instantiate(info.enemyPrefab, info.spawnPoint.position, Quaternion.identity);
-            enemy.GetComponent<NetworkObject>().Spawn();
+            enemy.GetComponent<NetworkObject>().Spawn(destroyWithScene: true);
             if (enemy.TryGetComponent<EnemyPatternMovement>(out EnemyPatternMovement patternMovement))
                 patternMovement.Init(info.destinationPoints);
         }

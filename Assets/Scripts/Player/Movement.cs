@@ -36,6 +36,7 @@ public class Movement : NetworkBehaviour {
     public InputHandler input;
     public Animator animator;
     public Health health;
+    public WeaponManager weaponManager;
 
     [Header("Sounds & Effects")]
     public GameObject jumpSound;
@@ -135,8 +136,14 @@ public class Movement : NetworkBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
+        if (!IsOwner) return;
+        
         if (collision.gameObject.layer == LayerMask.GetMask("Ground")) {
             Destroy(Instantiate(landSound), 1f);
+        }
+        if (collision.TryGetComponent<PickUpWeapon>(out PickUpWeapon weapon)) {
+            if (weaponManager == null) { Debug.LogError("Weapon manager not set to player!"); return; }
+            weaponManager.TryPickup(weapon);
         }
     }
 }
