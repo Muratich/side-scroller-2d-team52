@@ -9,6 +9,7 @@ public class SniperWeapon : Weapon {
     public override void Attack() {
         if (!isReloaded || scaleRef == null) return;
 
+        isReloaded = false;
         GameObject projObj = Instantiate(proj, firePos.position, Quaternion.identity);
 
         if (projObj.TryGetComponent<NetworkObject>(out NetworkObject projNet))

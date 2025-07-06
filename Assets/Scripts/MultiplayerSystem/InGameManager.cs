@@ -18,7 +18,7 @@ public class InGameManager : NetworkBehaviour {
 
     public Health GetPlayerHealth(ulong clientId) {
         playerData.TryGetValue(clientId, out var player);
-        return player.health;
+        return player?.health;
     }
 
     public IReadOnlyCollection<PlayerData> AllPlayersData => playerData.Values;

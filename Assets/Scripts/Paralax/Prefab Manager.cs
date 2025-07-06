@@ -18,6 +18,7 @@ namespace MatthewAssets
 
         void Start()
         {
+            if (floorCollider == null || prefabs == null || cameraPivot == null || infoText == null) Debug.LogError("Not all components added!");
             UpdateInfoText(); // Update text at start
         }
         void Update()
@@ -56,7 +57,7 @@ namespace MatthewAssets
             currentIndex--;
             if (currentIndex < 0)
             {
-                currentIndex = prefabs.Length - 1;
+                currentIndex = Mathf.Max(prefabs.Length, 1) - 1;
             }
             UpdateInfoText();
         }

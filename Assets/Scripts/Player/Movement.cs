@@ -67,9 +67,9 @@ public class Movement : NetworkBehaviour {
             if (paralaxPrefab == null) { Debug.Log("Paralax not set!"); return; }
 
             GameObject paralaxObj = Instantiate(paralaxPrefab, transform.position, Quaternion.identity);
-            // foreach (SimpleParallaxScroller sp in paralaxObj.GetComponentsInChildren<SimpleParallaxScroller>()) {
-            //     sp.Init(cam.GetComponent<Camera>());
-            // }
+            foreach (SimpleParallaxScroller sp in paralaxObj.GetComponentsInChildren<SimpleParallaxScroller>()) {
+                sp.Init(cam.GetComponent<Camera>());
+            }
         }
         isMoving.OnValueChanged += (oldVal, newVal) => { animator.SetBool("move", newVal); };
     }

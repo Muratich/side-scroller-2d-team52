@@ -1,10 +1,6 @@
 using UnityEngine;
 
-namespace MatthewAssets
-{
-
-
-    public class CameraOrbit : MonoBehaviour
+ public class CameraOrbit : MonoBehaviour
     {
         public Transform target; // The object around which the camera will rotate
         public float distance = 10.0f; // Distance from object
@@ -13,12 +9,12 @@ namespace MatthewAssets
 
         private float currentAngle = 0.0f;
 
-        void Update()
+        void LateUpdate()
         {
             if (target)
             {
                 // Increase angle based on time and orbit speed
-                currentAngle += orbitSpeed * Time.deltaTime;
+                currentAngle += orbitSpeed * Time.deltaTime % 360;
 
                 // Calculate the new camera position
                 float x = Mathf.Cos(currentAngle) * distance;
@@ -34,5 +30,3 @@ namespace MatthewAssets
             }
         }
     }
-}
-
