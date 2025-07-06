@@ -7,7 +7,7 @@ public class WhiteShade : MonoBehaviour {
     private float stopTime;
     private Color defaultColor = Color.white;
 
-    void Awake() {
+    public void Awake() {
         if (spriteRenderer == null) { Debug.LogError("Sprtie renderer not set to WhiteShade");  return; }
         defaultColor = spriteRenderer.color;
     }

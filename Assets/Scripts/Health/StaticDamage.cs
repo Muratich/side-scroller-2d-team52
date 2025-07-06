@@ -7,7 +7,7 @@ public class StaticDamage : MonoBehaviour {
     public int damage = 1;
     public List<string> enemyTags;
 
-    void OnTriggerEnter2D(Collider2D collision) {
+    public void OnTriggerEnter2D(Collider2D collision) {
         if (!NetworkManager.Singleton.IsServer || !enemyTags.Contains(collision.tag)) return;
 
         if (collision.TryGetComponent<Health>(out Health health))

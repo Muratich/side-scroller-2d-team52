@@ -1,0 +1,11 @@
+{
+  "name": "Gameplay",
+  "autoReferenced": true,
+  "references": [
+    "Unity.Netcode.Runtime",
+    "Unity.Netcode",
+    "Unity.TextMeshPro",
+    "Unity.InputSystem",
+    "Health"
+  ]
+}

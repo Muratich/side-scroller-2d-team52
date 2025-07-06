@@ -6,7 +6,7 @@ public class PlayerSpawner : MonoBehaviour {
     public GameObject clientPlayerPrefab;
     public InGameManager inGameManager;
 
-    private void Start() {
+    public void Start() {
         if (inGameManager == null) Debug.Log("In game manager not set!");
         if (NetworkManager.Singleton.IsServer) {
             SpawnAllExistingClients();

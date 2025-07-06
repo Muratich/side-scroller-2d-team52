@@ -3,7 +3,7 @@ using UnityEngine;
 using Unity.Netcode;
 
 public class EnemySpawner : MonoBehaviour {
-    [SerializeField] private List<EnemySpawnInfo> enemiesInfo;
+    [SerializeField] public List<EnemySpawnInfo> enemiesInfo;
 
     void Start() {
         if (NetworkManager.Singleton.IsServer)

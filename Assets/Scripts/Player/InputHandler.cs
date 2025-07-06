@@ -9,7 +9,7 @@ public class InputHandler : NetworkBehaviour  {
     [HideInInspector] public float jumpStartTime = float.NegativeInfinity;
     public WeaponManager weaponManager;
 
-    void Awake() {
+    public void Awake() {
         controls = new Control();
         if (weaponManager == null) Debug.LogError("Weapon Manager is null!");
     }

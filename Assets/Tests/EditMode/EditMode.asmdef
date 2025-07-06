@@ -1,0 +1,6 @@
+{
+    "name": "EditMode",
+    "references": ["Gameplay", "Unity.Netcode.Runtime", "Unity.InputSystem", "Health"],
+    "optionalUnityReferences": ["TestAssemblies"],
+    "includePlatforms": ["Editor"]
+}
