@@ -1,4 +1,4 @@
-name: Unity CI — тесты и билд
+name: Unity CI — Tests
 
 on:
   push:
@@ -21,28 +21,34 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+
       - name: Cache Library folder
         uses: actions/cache@v3
         with:
           path: Library
           key: Library-${{ matrix.testMode }}-${{ hashFiles('ProjectSettings/ProjectVersion.txt') }}
           restore-keys: Library-
+
+      - name: Activate Unity license
+        uses: game-ci/unity-activate@v2
+        with:
+          serial: ${{ secrets.UNITY_SERIAL }}
+          # или, если используешь лицензионный файл:
+          # unityLicense: ${{ secrets.UNITY_LICENSE }}
+
       - name: Run tests (${{ matrix.testMode }})
         id: tests
         uses: game-ci/unity-test-runner@v4
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           testMode: ${{ matrix.testMode }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Upload test artifacts
+        if: always() && steps.tests.outcome == 'success'
         uses: actions/upload-artifact@v4
-        if: ${{ always() }}
         with:
           name: Tests-${{ matrix.testMode }}
-          path: ${{ steps.tests.outputs.artifactsPath }}
+          path: artifacts
 
   build:
     name: 🛠 Build Project
@@ -56,20 +62,25 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+
       - name: Cache Library folder
         uses: actions/cache@v3
         with:
           path: Library
           key: Library-${{ matrix.platform }}-${{ hashFiles('ProjectSettings/ProjectVersion.txt') }}
           restore-keys: Library-
+
+      - name: Activate Unity license
+        uses: game-ci/unity-activate@v2
+        with:
+          serial: ${{ secrets.UNITY_SERIAL }}
+          # или: unityLicense: ${{ secrets.UNITY_LICENSE }}
+
       - name: Build for ${{ matrix.platform }}
         uses: game-ci/unity-builder@v4
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ matrix.platform }}
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
