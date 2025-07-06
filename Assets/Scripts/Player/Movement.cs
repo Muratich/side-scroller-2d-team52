@@ -35,6 +35,7 @@ public class Movement : NetworkBehaviour {
     public InputHandler input;
     public Animator animator;
     public Health health;
+    public WeaponManager weaponManager;
 
     [Header("Sounds & Effects")]
     public GameObject jumpSound;
@@ -42,8 +43,10 @@ public class Movement : NetworkBehaviour {
 
     [Header("Camera")]
     public GameObject cameraPrefab;
-    private CameraFollow myCameraFollow;
+    [HideInInspector] public CameraFollow myCameraFollow;
+    [HideInInspector] public HealthUI healthUI;
     public GameObject healthUIPrefab;
+    public GameObject paralaxPrefab;
 
     void Awake() {
         if (rb == null || input == null || animator == null || health == null) Debug.Log("Not all components was added to player!");
@@ -53,13 +56,20 @@ public class Movement : NetworkBehaviour {
     }
 
     public override void OnNetworkSpawn() {
-        if (IsOwner) {
+        if (IsLocalPlayer) {
             GameObject cam = Instantiate(cameraPrefab);
             myCameraFollow = cam.GetComponent<CameraFollow>();
             myCameraFollow.SetTarget(transform);
 
-            HealthUI healthUI = Instantiate(healthUIPrefab, Vector3.zero, Quaternion.identity).GetComponent<HealthUI>();
+            healthUI = Instantiate(healthUIPrefab, Vector3.zero, Quaternion.identity).GetComponent<HealthUI>();
             healthUI.Init(health);
+
+            if (paralaxPrefab == null) { Debug.Log("Paralax not set!"); return; }
+
+            GameObject paralaxObj = Instantiate(paralaxPrefab, transform.position, Quaternion.identity);
+            foreach (SimpleParallaxScroller sp in paralaxObj.GetComponentsInChildren<SimpleParallaxScroller>()) {
+                sp.Init(cam.GetComponent<Camera>());
+            }
         }
         isMoving.OnValueChanged += (oldVal, newVal) => { animator.SetBool("move", newVal); };
     }
@@ -125,8 +135,14 @@ public class Movement : NetworkBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
+        if (!IsOwner) return;
+        
         if (collision.gameObject.layer == LayerMask.GetMask("Ground")) {
             Destroy(Instantiate(landSound), 1f);
+        }
+        if (collision.TryGetComponent<PickUpWeapon>(out PickUpWeapon weapon)) {
+            if (weaponManager == null) { Debug.LogError("Weapon manager not set to player!"); return; }
+            weaponManager.TryPickup(weapon);
         }
     }
 }

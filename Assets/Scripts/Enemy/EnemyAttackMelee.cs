@@ -1,35 +1,41 @@
 using System.Collections;
 using UnityEngine;
+using Unity.Netcode;
 
 public class EnemyAttackMelee : EnemyAttack {
     public GameObject hitZone;
     private Coroutine hitCor;
 
-    
+
     public void Awake() {
         if (animator == null) Debug.LogError("Animator was not added to:" + gameObject.name);
     }
 
-
-    public override void StartAttack(Transform target) {
+    protected override void StartAttack(Vector3 targetPos) {
         if (hitCor != null) return;
-        hitCor = StartCoroutine(Hit());
-        animator.SetBool("attack", true);
+        hitCor = StartCoroutine(HitLoop());
+        PlayAttack(true);
     }
 
-    public override void StopAttack() {
+    protected override void StopAttack() {
         if (hitCor != null) {
             StopCoroutine(hitCor);
             hitCor = null;
         }
-        animator.SetBool("attack", false);
+        PlayAttack(false);
     }
 
-    IEnumerator Hit() {
+    IEnumerator HitLoop() {
         while (true) {
             GameObject hitZoneObj = Instantiate(hitZone, transform.position, Quaternion.identity);
+
+            hitZoneObj.transform.localScale = -transform.localScale;
+            hitZoneObj.transform.position += new Vector3(1.5f * transform.localScale.x, 0, 0);
+            
+            if (hitZoneObj.TryGetComponent<NetworkObject>(out NetworkObject hitZoneNet))
+                hitZoneNet.Spawn();
             Destroy(hitZoneObj, 0.5f);
             yield return new WaitForSeconds(attackReload);
-        }   
+        }
     }
 }

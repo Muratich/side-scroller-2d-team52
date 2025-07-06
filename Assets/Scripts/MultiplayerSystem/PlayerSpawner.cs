@@ -1,11 +1,13 @@
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerSpawner : MonoBehaviour {
-    public GameObject playerPrefab;
+    public GameObject hostPlayerPrefab;
+    public GameObject clientPlayerPrefab;
+    public InGameManager inGameManager;
 
-    private void Start() {
+    public void Start() {
+        if (inGameManager == null) Debug.Log("In game manager not set!");
         if (NetworkManager.Singleton.IsServer) {
             SpawnAllExistingClients();
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
@@ -28,16 +30,22 @@ public class PlayerSpawner : MonoBehaviour {
     }
 
     private void SpawnForClient(ulong clientId) {
-        if (playerPrefab == null) { Debug.Log("Player prefab not set!"); return; }
+        bool isHost = NetworkManager.Singleton.IsHost && clientId == NetworkManager.Singleton.LocalClientId;
+        GameObject prefabToSpawn = isHost ? hostPlayerPrefab : clientPlayerPrefab;
+
+        if (prefabToSpawn == null) { Debug.Log("Player prefab not set!"); return; }
 
         Vector3 spawnPoint;
         GameObject spObj = GameObject.FindGameObjectWithTag("Respawn");
 
-        if (spObj == null) { Debug.Log("Spawn point not found on scene!");  spawnPoint = new Vector3(0, 0, 0); }
+        if (spObj == null) { Debug.Log("Spawn point not found on scene!"); spawnPoint = new Vector3(0, 0, 0); }
         else spawnPoint = spObj.transform.position;
 
-        GameObject go = Instantiate(playerPrefab, spawnPoint, Quaternion.identity);
-        if (!go.TryGetComponent<NetworkObject>(out NetworkObject netObj)) { Debug.Log("Player has not NetworkObject!");  return; }
+        GameObject go = Instantiate(prefabToSpawn, spawnPoint, Quaternion.identity);
+        if (!go.TryGetComponent<NetworkObject>(out NetworkObject netObj)) { Debug.Log("Player has not NetworkObject!"); return; }
         netObj.SpawnAsPlayerObject(clientId, true);
+
+        if (!go.TryGetComponent<Health>(out Health health)) { Debug.Log("Player has not Health!"); return; }
+        inGameManager.RegisterPlayer(clientId, health);
     }
 }

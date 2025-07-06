@@ -8,13 +8,13 @@ public class HealthUI : MonoBehaviour {
     public void Init(Health target) {
         health = target;
         ClearBar();
-        SetHealthUI(health.health);
+        SetHealthUI(health.CurrentHealth.Value);
         health.onDamage?.AddListener(onHealthChangeHandler);
         health.onHeal?.AddListener(onHealthChangeHandler);
     }
 
     private void onHealthChangeHandler() {
-        SetHealthUI(health.health);
+        SetHealthUI(health.CurrentHealth.Value);
     }
 
     private void ClearBar() {

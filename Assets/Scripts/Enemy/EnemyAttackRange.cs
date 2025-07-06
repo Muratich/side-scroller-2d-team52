@@ -1,44 +1,44 @@
 using System.Collections;
 using UnityEngine;
+using Unity.Netcode;
 
 public class EnemyAttackRange : EnemyAttack {
-    [Header("Characteristics")]
-    public int fireRatePerMinute = 30;
-    public GameObject bullet;
+    public GameObject bulletPrefab;
     public float bulletSpeed;
     private Coroutine fireCor;
-    private Transform currTarget;
+    private Vector3 currTargetPos;
 
     public void Awake() {
         if (animator == null) Debug.LogError("Animator was not added to:" + gameObject.name);
-        if (bullet == null) Debug.LogError("Bullet was not added to:" + gameObject.name);
+        if (bulletPrefab == null) Debug.LogError("Bullet was not added to:" + gameObject.name);
     }
 
-    public override void StartAttack(Transform target) {
+    protected override void StartAttack(Vector3 targetPosition) {
         if (fireCor != null) return;
-        currTarget = target;
+        currTargetPos = targetPosition;
         fireCor = StartCoroutine(Fire());
-        animator.SetBool("attack", true);
+        PlayAttack(true);
     }
 
-    public override void StopAttack() {
+    protected override void StopAttack() {
         if (fireCor != null) {
             StopCoroutine(fireCor);
             fireCor = null;
         }
-        animator.SetBool("attack", false);
-        currTarget = null;
+        PlayAttack(false);
     }
 
     IEnumerator Fire() {
-        while (currTarget != null) {
-            Vector2 dir = (currTarget.position - transform.position).normalized;
-            GameObject proj = Instantiate(bullet, transform.position, Quaternion.identity);
-            Rigidbody2D rb = proj.GetComponent<Rigidbody2D>();
-            Destroy(proj, 5f);
-            if (rb != null) {
+        while (true) {
+            Vector2 dir = (currTargetPos - transform.position).normalized;
+            GameObject proj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+
+            if (proj.TryGetComponent<NetworkObject>(out NetworkObject projNet))
+                projNet.Spawn();
+            if (proj.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
                 rb.linearVelocity = dir * bulletSpeed;
-            }
+
+            Destroy(proj, 5f);
             yield return new WaitForSeconds(attackReload);
         }
     }

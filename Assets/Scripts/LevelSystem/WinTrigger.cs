@@ -7,7 +7,7 @@ public class WinTrigger : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {
+    public void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player") {
             SceneManager.LoadScene(0);
         }

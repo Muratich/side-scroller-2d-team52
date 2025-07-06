@@ -7,28 +7,39 @@ public class InputHandler : NetworkBehaviour  {
     [HideInInspector] public Vector2 movement = Vector2.zero;
     [HideInInspector] public float jumpPressTime = float.NegativeInfinity;
     [HideInInspector] public float jumpStartTime = float.NegativeInfinity;
+    public WeaponManager weaponManager;
 
-    void Awake() => controls = new Control();
+    public void Awake() {
+        controls = new Control();
+        if (weaponManager == null) Debug.LogError("Weapon Manager is null!");
+    }
+    
     public override void OnNetworkSpawn() {
         if (IsOwner) {
             controls.Enable();
             controls.Player.Move.performed += OnMovePerformed;
-            controls.Player.Move.canceled  += OnMoveCanceled;
+            controls.Player.Move.canceled += OnMoveCanceled;
             controls.Player.Jump.performed += JumpPress;
             controls.Player.Jump.canceled += JumpRelease;
-        } else {
+            controls.Player.Attack.performed += AttackPerformed;
+        }
+        else {
             controls.Disable();
         }
     }
 
-    public override void OnNetworkDespawn()
-    {
-        if (IsOwner)
-        {
+    private void AttackPerformed(InputAction.CallbackContext ctx) {
+        if (weaponManager != null)
+            weaponManager.ExecuteAttack();
+    }
+
+    public override void OnNetworkDespawn() {
+        if (IsOwner) {
             controls.Player.Move.performed -= OnMovePerformed;
-            controls.Player.Move.canceled  -= OnMoveCanceled;
+            controls.Player.Move.canceled -= OnMoveCanceled;
             controls.Player.Jump.performed -= JumpPress;
-            controls.Player.Jump.canceled  -= JumpRelease;
+            controls.Player.Jump.canceled -= JumpRelease;
+            controls.Player.Attack.performed -= AttackPerformed;
             controls.Disable();
         }
     }
@@ -38,20 +49,4 @@ public class InputHandler : NetworkBehaviour  {
 
     void JumpPress(InputAction.CallbackContext value) => jumpPressTime = Time.time;
     void JumpRelease(InputAction.CallbackContext value) => jumpPressTime = jumpStartTime = float.NegativeInfinity;
-
-    private void OnEnable() {
-        controls.Enable();
-        controls.Player.Move.performed += OnMovePerformed;
-        controls.Player.Move.canceled += OnMoveCanceled;
-        controls.Player.Jump.performed += JumpPress;
-        controls.Player.Jump.canceled += JumpRelease;
-    }
-
-    private void OnDisable() {
-        controls.Disable();
-        controls.Player.Move.performed -= OnMovePerformed;
-        controls.Player.Move.canceled -= OnMoveCanceled;
-        controls.Player.Jump.performed -= JumpPress;
-        controls.Player.Jump.canceled -= JumpRelease;
-    }
 }
