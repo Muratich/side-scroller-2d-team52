@@ -116,6 +116,7 @@ public class LobbyManager : MonoBehaviour {
     }
 
     private void EnterLobby() {
+        if (IsSingleplayer) return;
         menuPanel.SetActive(false);
         lobbyPanel.SetActive(true);
         UpdateLobbyStatus();

@@ -338,6 +338,7 @@ MonoBehaviour:
   healthUI: {fileID: 0}
   healthUIPrefab: {fileID: 1059374936457149010, guid: 4e0ed0ef0e0786f49aad3b5b5d893d09, type: 3}
   paralaxPrefab: {fileID: 2481891452401420464, guid: 336d0df6fa422af4297baac9c95a51ab, type: 3}
+  takeWeaponInterval: 0.1
 --- !u!114 &3028687879752967258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +552,7 @@ MonoBehaviour:
   holdPoint: {fileID: 2440543094203270385}
   dropPoint: {fileID: 4566831523506261908}
   scaleRef: {fileID: 4522912684144102725}
+  defaultWeapon: {fileID: -4763279282194432859, guid: a7e9ca4003527aa498e1c9e59896716b, type: 3}
   currentWeapon: {fileID: 0}
 --- !u!114 &3267885018336316667
 MonoBehaviour:

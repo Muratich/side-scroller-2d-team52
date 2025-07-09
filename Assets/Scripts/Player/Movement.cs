@@ -48,6 +48,10 @@ public class Movement : NetworkBehaviour {
     public GameObject healthUIPrefab;
     public GameObject paralaxPrefab;
 
+    [Header("Pick up weapons")]
+    [SerializeField] private float takeWeaponInterval = 0.1f;
+    private float lastPickUpTime;
+
     void Awake() {
         if (rb == null || input == null || animator == null || health == null) Debug.Log("Not all components was added to player!");
         rb = GetComponent<Rigidbody2D>();
@@ -141,6 +145,9 @@ public class Movement : NetworkBehaviour {
             Destroy(Instantiate(landSound), 1f);
         }
         if (collision.TryGetComponent<PickUpWeapon>(out PickUpWeapon weapon)) {
+            if (Time.time - lastPickUpTime <= takeWeaponInterval) return;
+
+            lastPickUpTime = Time.time;
             if (weaponManager == null) { Debug.LogError("Weapon manager not set to player!"); return; }
             weaponManager.TryPickup(weapon);
         }
