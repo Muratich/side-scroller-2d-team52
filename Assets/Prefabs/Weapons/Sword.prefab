@@ -132,6 +132,7 @@ MonoBehaviour:
   reloadTime: 4
   firePos: {fileID: 8625819701080728993}
   proj: {fileID: 8407122931136036164, guid: 375f9a80e8acbc54d988608bd8ea1f9a, type: 3}
+  dropPrefab: {fileID: 5439959265074745638, guid: 035494aaf00ddcb49b1d4539b560e8c2, type: 3}
   target: {fileID: 0}
   scaleRef: {fileID: 0}
 --- !u!114 &2428852558539970196

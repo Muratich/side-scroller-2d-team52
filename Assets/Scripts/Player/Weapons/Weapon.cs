@@ -5,6 +5,7 @@ public abstract class Weapon : NetworkBehaviour {
     public float reloadTime = 3;
     public Transform firePos;
     public GameObject proj;
+    public GameObject dropPrefab;
 
     [HideInInspector] public Transform target;
     [HideInInspector] public Transform scaleRef;
