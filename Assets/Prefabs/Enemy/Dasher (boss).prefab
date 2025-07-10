@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  viewRadius: 14
+  viewRadius: 20
   viewAngle: 90
   targetMask:
     serializedVersion: 2
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1070061724411746116}
   - component: {fileID: 913879341688779502}
   m_Layer: 7
-  m_Name: Dasher (enemy)
+  m_Name: Dasher (boss)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: e9b8e1622b3cc314396f4721ffd35a66, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ba278135405906d458d9e813a203ba2e, type: 3}
   m_Color: {r: 0.86415094, g: 0.35707366, b: 0.7644828, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -259,13 +259,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 5.12, y: 5.12}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.12, y: 5.12}
   m_EdgeRadius: 0
 --- !u!114 &-214466813311987268
 MonoBehaviour:
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4053264362
+  GlobalObjectIdHash: 2115572406
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -310,11 +310,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  speed: 12
-  timeToStayAtPoint: 2
+  speed: 18
+  timeToStayAtPoint: 0.1
   isDasher: 1
   dashSpeed: 26
-  dashAttackDuration: 1
+  dashAttackDuration: 0.5
   rb: {fileID: 2582194137994027386}
   animator: {fileID: 7361631085288405772}
   viewZone: {fileID: 7606093424099575457}
@@ -332,8 +332,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   animator: {fileID: 7361631085288405772}
-  attackReload: 3
-  hitZone: {fileID: 8407122931136036164, guid: 2095d42c1bbea0848856961ac2836b76, type: 3}
+  attackReload: 5
+  hitZone: {fileID: 8407122931136036164, guid: fc3cad20cb31f8e40808f6ac10434c35, type: 3}
 --- !u!95 &7361631085288405772
 Animator:
   serializedVersion: 7
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  startHealth: 4
+  startHealth: 18
   onDamage:
     m_PersistentCalls:
       m_Calls:

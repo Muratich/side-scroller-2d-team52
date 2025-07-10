@@ -132,7 +132,7 @@ Transform:
   m_GameObject: {fileID: 1602361522707910691}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -312,6 +312,9 @@ MonoBehaviour:
   - {fileID: 0}
   speed: 15
   timeToStayAtPoint: 1
+  isDasher: 0
+  dashSpeed: 20
+  dashAttackDuration: 1
   rb: {fileID: 2582194137994027386}
   animator: {fileID: 7361631085288405772}
   viewZone: {fileID: 7606093424099575457}
@@ -479,7 +482,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   health: {fileID: 8770901439195514026}
-  networkObject: {fileID: -214466813311987268}
 --- !u!114 &34913074077376750
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -87,21 +87,25 @@ public class ViewZone : NetworkBehaviour {
         }
     }
 
-    // private void OnDrawGizmosSelected() {
-    //     Gizmos.color = Color.yellow;
-    //     Gizmos.DrawWireSphere(transform.position, viewRadius);
+   public Transform GetClosestVisibleTarget() {
+        if (previouslyVisible.Count == 0)
+            return null;
 
-    //     Vector3 origin = transform.position;
-    //     Vector2 facingDir = new Vector2(enemyObj.localScale.x > 0 ? 1f : -1f, 0f);
-    //     float halfAngle = viewAngle / 2f;
+        Transform closest = null;
+        float minDist = float.MaxValue;
+        Vector3 origin = enemyObj.position;
 
-    //     Quaternion leftRot = Quaternion.Euler(0, 0, -halfAngle);
-    //     Quaternion rightRot = Quaternion.Euler(0, 0, halfAngle);
-    //     Vector2 leftDir = leftRot * facingDir;
-    //     Vector2 rightDir = rightRot * facingDir;
+        foreach (var t in previouslyVisible) {
+            if (t == null) 
+                continue;
 
-    //     Gizmos.color = Color.blue;
-    //     Gizmos.DrawLine(origin, origin + (Vector3)leftDir.normalized * viewRadius);
-    //     Gizmos.DrawLine(origin, origin + (Vector3)rightDir.normalized * viewRadius);
-    // }
+            float dist = Vector3.Distance(origin, t.position);
+            if (dist < minDist) {
+                minDist = dist;
+                closest = t;
+            }
+        }
+
+        return closest;
+    }
 }
