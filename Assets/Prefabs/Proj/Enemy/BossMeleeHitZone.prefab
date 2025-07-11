@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ab9cb08285a95409be423c34837319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 1
   enemyTags:
   - Player
 --- !u!114 &-3276388900571172862
@@ -176,6 +176,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6394450067741425404}
     m_Modifications:
+    - target: {fileID: 1173243701402730150, guid: 74c549d1b06b6b140a1fd9536eea637f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173243701402730150, guid: 74c549d1b06b6b140a1fd9536eea637f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1173243701402730150, guid: 74c549d1b06b6b140a1fd9536eea637f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.035381794

@@ -57,9 +57,14 @@ public class ViewZone : NetworkBehaviour {
             bool hitBarrier = Physics2D.Raycast(origin, dirToTarget, distToTarget, barrierMask);
             bool inSight = angleToTarget <= viewAngle / 2f && !hitBarrier;
 
-            if (inSight && !previouslyVisible.Contains(t)) {
-                previouslyVisible.Add(t);
-                enemyAttack.StartAttackServerRpc(t.position);
+            if (inSight) {
+                if (!previouslyVisible.Contains(t)) {
+                    previouslyVisible.Add(t);
+                    enemyAttack.StartAttackServerRpc(t.position);
+                }
+                else {
+                    enemyAttack.UpdateTargetPositionServerRpc(t.position);
+                }
             }
             else if (!inSight && previouslyVisible.Contains(t)) {
                 previouslyVisible.Remove(t);

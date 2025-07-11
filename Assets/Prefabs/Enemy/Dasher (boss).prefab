@@ -137,6 +137,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6716069675613185326}
+  - {fileID: 8586520639020620235}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3043462408650588867
@@ -333,6 +334,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   animator: {fileID: 7361631085288405772}
   attackReload: 5
+  attackPos: {fileID: 8586520639020620235}
   hitZone: {fileID: 8407122931136036164, guid: fc3cad20cb31f8e40808f6ac10434c35, type: 3}
 --- !u!95 &7361631085288405772
 Animator:
@@ -510,3 +512,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 3043462408650588867}
   shadeColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!1 &5817469299066715876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8586520639020620235}
+  m_Layer: 7
+  m_Name: AttackPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8586520639020620235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817469299066715876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8285351183051737761}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

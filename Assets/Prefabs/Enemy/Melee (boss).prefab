@@ -82,8 +82,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  viewRadius: 10
-  viewAngle: 90
+  viewRadius: 6
+  viewAngle: 45
   targetMask:
     serializedVersion: 2
     m_Bits: 64
@@ -136,6 +136,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2128265118048174524}
   - {fileID: 6716069675613185326}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -310,8 +311,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  speed: 10
-  timeToStayAtPoint: 4
+  speed: 5
+  timeToStayAtPoint: 2
   isDasher: 0
   dashSpeed: 20
   dashAttackDuration: 1
@@ -332,7 +333,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   animator: {fileID: 7361631085288405772}
-  attackReload: 6
+  attackReload: 5
+  attackPos: {fileID: 2128265118048174524}
   hitZone: {fileID: 3359273986785628326, guid: 31b3cbc7304aba248b2c6f5cee315493, type: 3}
 --- !u!95 &7361631085288405772
 Animator:
@@ -510,3 +512,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 3043462408650588867}
   shadeColor: {r: 0.5999999, g: 0.56943387, b: 0.56943387, a: 1}
+--- !u!1 &2110854083353518255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2128265118048174524}
+  m_Layer: 7
+  m_Name: AttackPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2128265118048174524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110854083353518255}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8285351183051737761}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

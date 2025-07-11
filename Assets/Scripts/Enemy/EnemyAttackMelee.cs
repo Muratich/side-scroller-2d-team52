@@ -27,9 +27,10 @@ public class EnemyAttackMelee : EnemyAttack {
 
     IEnumerator HitLoop() {
         while (true) {
-            GameObject hitZoneObj = Instantiate(hitZone, transform.position, Quaternion.identity);
+            GameObject hitZoneObj = Instantiate(hitZone, attackPos.position, Quaternion.identity);
 
-            hitZoneObj.transform.localScale = -transform.localScale;
+            Vector3 scaleMul = hitZoneObj.transform.localScale;
+            hitZoneObj.transform.localScale = new Vector3(transform.localScale.x > 0 ? scaleMul.x : -scaleMul.x, scaleMul.y, scaleMul.z);
             hitZoneObj.transform.position += new Vector3(1.5f * transform.localScale.x, 0, 0);
             
             if (hitZoneObj.TryGetComponent<NetworkObject>(out NetworkObject hitZoneNet))
