@@ -12,7 +12,7 @@ public class EnemyAttackMelee : EnemyAttack {
     }
 
     protected override void StartAttack(Vector3 targetPos) {
-        if (hitCor != null) return;
+        if (hitCor != null || hitZone == null) return;
         hitCor = StartCoroutine(HitLoop());
         PlayAttack(true);
     }

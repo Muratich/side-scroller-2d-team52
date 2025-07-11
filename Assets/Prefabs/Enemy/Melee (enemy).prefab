@@ -346,7 +346,7 @@ MonoBehaviour:
   timeToStayAtPoint: 3
   isDasher: 0
   dashSpeed: 20
-  dashAttackDuration: 1
+  dashTime: 1
   rb: {fileID: 2582194137994027386}
   animator: {fileID: 7361631085288405772}
   viewZone: {fileID: 7606093424099575457}
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  startHealth: 3
+  startHealth: 5
   onDamage:
     m_PersistentCalls:
       m_Calls:

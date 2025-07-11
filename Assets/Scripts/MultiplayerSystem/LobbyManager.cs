@@ -70,7 +70,7 @@ public class LobbyManager : MonoBehaviour {
             Debug.LogError("Failed to start host for singleplayer");
             return;
         }
-        NetworkManager.Singleton.SceneManager.LoadScene("Level_1", LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Level_2", LoadSceneMode.Single);
     }
 
     public void OnHostButtonClicked() {
@@ -127,6 +127,6 @@ public class LobbyManager : MonoBehaviour {
     }
 
     private void OnStartGameClicked() {
-        NetworkManager.Singleton.SceneManager.LoadScene("Level_1", LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Level_2", LoadSceneMode.Single);
     }
 }

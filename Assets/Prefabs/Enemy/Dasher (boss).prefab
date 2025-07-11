@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  viewRadius: 20
+  viewRadius: 15
   viewAngle: 90
   targetMask:
     serializedVersion: 2
@@ -90,7 +90,7 @@ MonoBehaviour:
   barrierMask:
     serializedVersion: 2
     m_Bits: 8
-  updateInterval: 0.24
+  updateInterval: 0.1
   rayOriginOffset: {x: 0, y: 0}
   enemyObj: {fileID: 8285351183051737761}
   enemyAttack: {fileID: -5432258092880316903}
@@ -183,7 +183,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: ba278135405906d458d9e813a203ba2e, type: 3}
   m_Color: {r: 0.86415094, g: 0.35707366, b: 0.7644828, a: 1}
   m_FlipX: 0
@@ -203,7 +203,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1602361522707910691}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -252,11 +252,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.32}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -266,7 +266,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 3.93, y: 4}
   m_EdgeRadius: 0
 --- !u!114 &-214466813311987268
 MonoBehaviour:
@@ -306,16 +306,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  destinationPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  destinationPoints: []
   speed: 18
-  timeToStayAtPoint: 0.1
+  timeToStayAtPoint: 2
   isDasher: 1
-  dashSpeed: 26
-  dashAttackDuration: 0.5
+  dashSpeed: 50
+  dashTime: 3
   rb: {fileID: 2582194137994027386}
   animator: {fileID: 7361631085288405772}
   viewZone: {fileID: 7606093424099575457}
@@ -333,9 +329,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   animator: {fileID: 7361631085288405772}
-  attackReload: 5
+  attackReload: 3
   attackPos: {fileID: 8586520639020620235}
-  hitZone: {fileID: 8407122931136036164, guid: fc3cad20cb31f8e40808f6ac10434c35, type: 3}
+  hitZone: {fileID: 3359273986785628326, guid: 31b3cbc7304aba248b2c6f5cee315493, type: 3}
 --- !u!95 &7361631085288405772
 Animator:
   serializedVersion: 7
@@ -432,7 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  startHealth: 18
+  startHealth: 20
   onDamage:
     m_PersistentCalls:
       m_Calls:

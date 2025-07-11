@@ -306,16 +306,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  destinationPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  destinationPoints: []
   speed: 1
   timeToStayAtPoint: 0.1
   isDasher: 0
   dashSpeed: 20
-  dashAttackDuration: 1
+  dashTime: 1
   rb: {fileID: 2582194137994027386}
   animator: {fileID: 7361631085288405772}
   viewZone: {fileID: 7606093424099575457}
@@ -355,7 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   animator: {fileID: 7361631085288405772}
-  attackReload: 0.1
+  attackReload: 0.4
   attackPos: {fileID: 2505680130594171312}
   bulletPrefab: {fileID: 3825004104589291362, guid: d80ce7552c84845409bcfaf97d585d66, type: 3}
   bulletSpeed: 12
@@ -433,7 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  startHealth: 15
+  startHealth: 12
   onDamage:
     m_PersistentCalls:
       m_Calls:
