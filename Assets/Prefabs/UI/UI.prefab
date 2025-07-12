@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4096827335382098202}
   - component: {fileID: 5673632445316683597}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: DisconnectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4334327106885095464}
-        m_TargetAssemblyTypeName: InGameSettings, Assembly-CSharp
+      - m_Target: {fileID: 5526895058425111917}
+        m_TargetAssemblyTypeName: InGameSettings, Gameplay
         m_MethodName: OnDisconnectButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -162,8 +162,8 @@ GameObject:
   - component: {fileID: 2598934356778559939}
   - component: {fileID: 5750713484092683117}
   - component: {fileID: -5628575122081405176}
-  - component: {fileID: 4334327106885095464}
   - component: {fileID: 1943127872786997394}
+  - component: {fileID: 5526895058425111917}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -281,19 +281,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &4334327106885095464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1059374936457149010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50da9a0d8ea30d34090ed00fa04d41ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!114 &1943127872786997394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +295,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 735542214936514173}
   healthPrefab: {fileID: 6189966119323798434, guid: ccff859519e1b3040ac7c0c8cace4688, type: 3}
+--- !u!114 &5526895058425111917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059374936457149010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50da9a0d8ea30d34090ed00fa04d41ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &1589906589425430556
 GameObject:
   m_ObjectHideFlags: 0

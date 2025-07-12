@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  reloadTime: 0.2
+  reloadTime: 0.76
   firePos: {fileID: 8625819701080728993}
   proj: {fileID: 3825004104589291362, guid: 3ac36481caefdcf458c3739942a0d8bc, type: 3}
   dropPrefab: {fileID: 5439959265074745638, guid: d34c89f7b05c0ac4bad214bc1a52b65d, type: 3}

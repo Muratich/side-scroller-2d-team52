@@ -1,8 +1,7 @@
-using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,8 +25,8 @@ public class LobbyManager : MonoBehaviour {
     private UnityTransport utp;
     public bool IsSingleplayer { get; private set; } = false;
 
+
     private void Start() {
-        DontDestroyOnLoad(gameObject);
         utp = NetworkManager.Singleton.GetComponent<UnityTransport>();
         if (inputField != null) inputField.text = "127.0.0.1";
         if (utp == null) {
@@ -130,6 +129,6 @@ public class LobbyManager : MonoBehaviour {
     }
 
     private void OnStartGameClicked() {
-        NetworkManager.Singleton.SceneManager.LoadScene("Level_1", UnityEngine.SceneManagement.LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Level_1", LoadSceneMode.Single);
     }
 }

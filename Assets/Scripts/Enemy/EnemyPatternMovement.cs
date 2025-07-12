@@ -11,6 +11,12 @@ public class EnemyPatternMovement : NetworkBehaviour {
     public float speed = 10;
     public float timeToStayAtPoint = 5;
 
+    [Header("Dash")]
+    public bool isDasher = false;
+    public float dashSpeed = 20f;
+    public float dashTime = 1f;
+    private float statDashTime;
+
 
     [Header("Components")]
     public Rigidbody2D rb;
@@ -33,14 +39,17 @@ public class EnemyPatternMovement : NetworkBehaviour {
         int currentPoint = 0;
         while (true) {
             Transform dest = destinationPoints[currentPoint];
-            while (Vector2.Distance(transform.position, dest.position) > 0.6f) {
+            while (Vector2.Distance(transform.position, dest.position) > 1f) {
                 if (viewZone.HasVisibleTargets) {
-                    yield return new WaitUntil(() => !viewZone.HasVisibleTargets);
+                    if (isDasher) {
+                        Vector3 targetPos = viewZone.GetClosestVisibleTarget().position;
+                        statDashTime = Time.time;
+                        yield return StartCoroutine(DashTo(targetPos));
+                    }
                 }
                 Vector2 newPos = Vector2.MoveTowards(transform.position, dest.position, speed * Time.deltaTime);
                 float dir = dest.position.x - transform.position.x;
-                if (dir > 0.01f) transform.localScale = new Vector3(1, 1, 1);
-                else if (dir < -0.01f) transform.localScale = new Vector3(-1, 1, 1);
+                transform.localScale = new Vector3(Mathf.Sign(dir), 1, 1);
 
                 rb.MovePosition(newPos);
                 animator.SetBool("run", true);
@@ -49,6 +58,25 @@ public class EnemyPatternMovement : NetworkBehaviour {
             animator.SetBool("run", false);
             yield return new WaitForSeconds(timeToStayAtPoint);
             currentPoint = (currentPoint + 1) % destinationPoints.Count;
+        }
+    }
+
+    IEnumerator DashTo(Vector3 targetPos) {
+        animator.SetBool("dash", true);
+        while (Time.time - statDashTime < dashTime) {
+            Vector2 newPos = Vector2.MoveTowards(transform.position, targetPos, dashSpeed * Time.deltaTime);
+            float dir = targetPos.x - transform.position.x;
+            transform.localScale = new Vector3(Mathf.Sign(dir), 1, 1);
+            rb.MovePosition(newPos);
+            yield return null;
+        }
+        animator.SetBool("dash", false);
+
+        var melee = GetComponent<EnemyAttackMelee>();
+        if (melee != null) {
+            melee.StartAttackServerRpc(transform.position);
+            yield return new WaitForSeconds(0.25f);
+            melee.StopAttackServerRpc();
         }
     }
 }

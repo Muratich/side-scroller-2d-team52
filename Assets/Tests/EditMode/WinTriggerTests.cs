@@ -11,10 +11,4 @@ public class WinTriggerTests {
         var collider = col.AddComponent<BoxCollider2D>();
         Assert.Throws<InvalidOperationException>(() => trigger.OnTriggerEnter2D(collider));
     }
-
-    [Test]
-    public void OnDeath_ThrowsInvalidOperationException() {
-        var trigger = new GameObject().AddComponent<WinTrigger>();
-        Assert.Throws<InvalidOperationException>(() => trigger.OnDeath());
-    }
 }

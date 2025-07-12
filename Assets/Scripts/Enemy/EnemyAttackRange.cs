@@ -6,7 +6,6 @@ public class EnemyAttackRange : EnemyAttack {
     public GameObject bulletPrefab;
     public float bulletSpeed;
     private Coroutine fireCor;
-    private Vector3 currTargetPos;
 
     public void Awake() {
         if (animator == null) Debug.LogError("Animator was not added to:" + gameObject.name);
