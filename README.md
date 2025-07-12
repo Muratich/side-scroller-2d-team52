@@ -1,5 +1,5 @@
 #CHAOS CLIMB
-!(logo.png)
+![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/logo.png)
 
 ## Usage
 The MVP 2 project is a multiplayer 2d side-scroller, in which we added multiplayer, synchronized opponents between the client and the host, and also added an action game with two types of weapons.
