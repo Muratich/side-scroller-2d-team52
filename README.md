@@ -1,4 +1,4 @@
-#CHAOS CLIMB
+# CHAOS CLIMB
 ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/logo.png)
 
 ## Usage
