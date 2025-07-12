@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -23,6 +24,7 @@ public class LobbyManager : MonoBehaviour {
     public ushort port = 777;
     private UnityTransport utp;
     public bool IsSingleplayer { get; private set; } = false;
+
 
     private void Start() {
         utp = NetworkManager.Singleton.GetComponent<UnityTransport>();
@@ -70,7 +72,7 @@ public class LobbyManager : MonoBehaviour {
             Debug.LogError("Failed to start host for singleplayer");
             return;
         }
-        NetworkManager.Singleton.SceneManager.LoadScene("Level_2", LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Level_1", LoadSceneMode.Single);
     }
 
     public void OnHostButtonClicked() {
@@ -127,6 +129,6 @@ public class LobbyManager : MonoBehaviour {
     }
 
     private void OnStartGameClicked() {
-        NetworkManager.Singleton.SceneManager.LoadScene("Level_2", LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Level_1", LoadSceneMode.Single);
     }
 }
