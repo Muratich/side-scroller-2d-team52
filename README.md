@@ -31,7 +31,7 @@
    - [Link to kanban board](https://miro.com/app/board/uXjVIrXDYK0=/)
    - Workflow:
       - As a base workflow we use GitHub Flow, since we have one "main" and for each sprint we create separate branch and pull requests further.
-      - ``` gitGraph
+   ``` mermaid
    commit id:"4993881 Initialization"
    commit id:"7c64e5c feat: added player sprite and walk animation"
    branch stg-3
@@ -91,8 +91,9 @@
    commit id:"f95e5a6 Update README.md"
    commit id:"1b21e47 Create Img"
    commit id:"63dfaa6 Delete Img"
-   commit id:"2cb4a15 (origin/master, origin/HEAD) Create template.md" ```
-      - Git workflow rules
+   commit id:"2cb4a15 (origin/master, origin/HEAD) Create template.md"
+```
+   - Git workflow rules
          - each contributor can create and close issues
          - issues must include acceptance criteria, priority and story points (as labels)
          - each branch should be "stg-{current sprint number}" (e.g "stg-5")
