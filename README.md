@@ -9,7 +9,9 @@
 
 ## Product
 💥 The goal of our project is to create a new 2D multiplayer side-scrolling game for customers, with all the necessary features.
+
 **Project context diagram:**
+
 ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/img/productBoard.png)
 **Project roadmap**
 ![](github.com/Muratich/side-scroller-2d-team52/blob/master/img/roadmap.png)
