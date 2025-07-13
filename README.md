@@ -133,10 +133,13 @@ The architecture of the project is modular in those places where it is needed. F
    - [Diagram](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/views/staticView.png)
 
 **Dynamic view**
-   - Dynamic view temp
+   - Sequence diagram (on input example)
+       - ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/views/dynamicView.png)
+   - Dynamic view diagram
+      - ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/views/dynamicView1.png)
 
 **Deployment view**
-   - The game runs in a peer‑to‑peer LAN model: each player launches the same executable and exchanges input data over a single UDP port (e.g. 7777) to synchronize physics, animations and events. For seamless host discovery, clients send simple UDP broadcasts on the local switch/router, with manual IP entry as a fallback; only one port needs to be opened in the firewall. This setup requires no external servers, minimizes latency and is trivially deployed on the customer’s network.
+   - ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/views/deployment%20view.png)
 
 **Tech stack**
    - Unity 6 (version 6000.0.39f1)
