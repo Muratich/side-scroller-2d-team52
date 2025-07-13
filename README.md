@@ -29,7 +29,7 @@
 
 ### Development 🏭
    - [Link to kanban board](https://miro.com/app/board/uXjVIrXDYK0=/)
-   - ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/.github/workflows/gitgrapg.png)
+   - ![Workflow (from gitgraph)](https://github.com/Muratich/side-scroller-2d-team52/blob/master/.github/workflows/gitgrapg.png)
    - Git workflow rules
       - each contributor can create and close issues
       - issues must include acceptance criteria, priority and story points (as labels)
