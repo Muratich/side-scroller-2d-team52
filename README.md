@@ -31,7 +31,6 @@
    - [Link to kanban board](https://miro.com/app/board/uXjVIrXDYK0=/)
    - Workflow:
       - As a base workflow we use GitHub Flow, since we have one "main" and for each sprint we create separate branch and pull requests further.
-   - ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/.github/workflows/gitgrapg.png)
 ```mermaid
 gitGraph
    commit id:"4993881 Initialization"
