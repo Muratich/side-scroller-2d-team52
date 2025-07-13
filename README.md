@@ -13,8 +13,11 @@
 **Project context diagram:**
 
 ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/img/productBoard.png)
+
 **Project roadmap**
-![](github.com/Muratich/side-scroller-2d-team52/blob/master/img/roadmap.png)
+
+![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/img/roadmap.png)
+
 📍 Guide for players:
    - To start singleplayer just press _Singleplayer_ button;
    - To play with friends using LAN, you need to be connected to a shared WiFi network. One player should create a lobby by clicking the _Host_ button, and the other player must enter the IP address of the host and click _Connect_.
