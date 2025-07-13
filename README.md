@@ -139,7 +139,7 @@ The architecture of the project is modular in those places where it is needed. F
       - ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/views/dynamicView1.png)
 
 **Deployment view**
-   - ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/views/deployment%20view.png)
+   - ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/views/deployment%20view1.png)
 
 **Tech stack**
    - Unity 6 (version 6000.0.39f1)
