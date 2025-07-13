@@ -2,29 +2,36 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class InGameSettings : NetworkBehaviour {
+public class InGameSettings : MonoBehaviour {
     public static InGameSettings Instance;
 
-    void Awake() => Instance = this;
+    void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     public void OnDisconnectButtonPressed() {
-        if (!IsOwner) return;
-        RequestDisconnectServerRpc();
-    }
+        if (NetworkManager.Singleton == null || !NetworkManager.Singleton.IsListening) {
+            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+            return;
+        }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void RequestDisconnectServerRpc(ServerRpcParams rpcParams = default) {
-        DisconnectAllClientRpc();
-    }
+        if (NetworkManager.Singleton.IsHost) {
+            NetworkManager.Singleton.Shutdown();
+        }
+        else if (NetworkManager.Singleton.IsClient) {
+            NetworkManager.Singleton.Shutdown();
+        }
 
-    [ClientRpc]
-    private void DisconnectAllClientRpc(ClientRpcParams rpcParams = default) {
-        DisconnectToMenu();
-    }
+        if (NetworkManager.Singleton.gameObject != null)
+            Destroy(NetworkManager.Singleton.gameObject);
 
-    public void DisconnectToMenu() {
-        NetworkManager.Singleton.Shutdown();
-        Destroy(NetworkManager.Singleton.gameObject);
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        GameObject profile = FindAnyObjectByType<Profile>().gameObject;
+        if (profile != null) Destroy(profile);
+
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 }
