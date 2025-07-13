@@ -29,16 +29,19 @@
 
 ### Development 🏭
    - [Link to kanban board](https://miro.com/app/board/uXjVIrXDYK0=/)
-   - ![Workflow (from gitgraph)](https://github.com/Muratich/side-scroller-2d-team52/blob/master/.github/workflows/gitgrapg.png)
-   - Git workflow rules
-      - each contributor can create and close issues
-      - issues must include acceptance criteria, priority and story points (as labels)
-      - each branch should be "stg-{current sprint number}" (e.g "stg-5")
-      - to merge "stg-{sprint number}" to "main" we need acceptance from customer
-      - commits should satisfy [commit style convention](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)
-      - pull request must be created by Marat Diiarov and accepted by customer
+   - Workflow:
+      - ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/.github/workflows/gitgrapg.png)
+      - Git workflow rules
+         - each contributor can create and close issues
+         - issues must include acceptance criteria, priority and story points (as labels)
+         - each branch should be "stg-{current sprint number}" (e.g "stg-5")
+         - to merge "stg-{sprint number}" to "main" we need acceptance from customer
+         - commits should satisfy [commit style convention](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)
+         - pull request must be created by Marat Diiarov and accepted by customer
    - Secret management
-      -   
+      - In the secrets of repository on GitHub, we store the Unity license.
+
+   
 ### Quality characteristics and quality attribute scenarios
 ### Quality Assurance
 ### Build and deployment automation
