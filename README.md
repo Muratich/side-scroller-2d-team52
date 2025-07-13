@@ -130,7 +130,7 @@ Unit tests: [Assets/Tests/](Assets/Tests/)
 The architecture of the project is modular in those places where it is needed. For example, inexperienced developers often write all the logic in one script when creating opponents. In our game, each opponent is "assembled" from separate components, for example, a melee opponent consists of components: movement by points, melee attack, inspection.
 
 **Static view**
-   - Mostly architecture of project dscribed in this [diagram](https://miro.com/app/board/uXjVIrXDYK0=/?moveToWidget=3458764634450580967&cot=14) of Miro board.
+   - [Diagram](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/views/staticView.png)
 
 **Dynamic view**
    - Dynamic view temp
