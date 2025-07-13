@@ -43,9 +43,25 @@
       - In the secrets of repository on GitHub, we store the Unity license.
 
    
-### Quality characteristics and quality attribute scenarios
-### Quality Assurance
+### Quality assurance
+#### Quality attribute scenarios
+![Link to the quality attribute scenarios documentation](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/quality-assurance/quality-attribute-scenarios.md)
+
+#### Automated tests
+The tests were conducted using the Unity Test Framework (UTF). 10 tests were written affecting different game mechanics (from the camera to the player's spawner). All tests are written in C# and are located in the Assets/Tests folder.
+#### Tools Used
+Unit framework for Unity UTF
+#### Types of Tests Implemented and their locations
+Unit tests: [Assets/Tests/](Assets/Tests/)
+#### User acceptance tests
+![link to  user acceptance tests file](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/quality-assurance/user-acceptance-tests.md)
+
 ### Build and deployment automation
+#### Continuous Integration
+   -  [main.yaml]
+   - [Workflow file](https://github.com/Muratich/side-scroller-2d-team52/blob/master/.github/workflows/main.yaml)
+   - Testing tools:
+     - Unity Test Runner: "Execute unit and integration tests"
 
 ### Architecture 🏢
 
