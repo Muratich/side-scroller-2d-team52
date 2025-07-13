@@ -32,7 +32,7 @@
    - Workflow:
       - As a base workflow we use GitHub Flow, since we have one "main" and for each sprint we create separate branch and pull requests further.
    ```mermaid
-gitgraph
+   gitgraph
    commit id:"4993881 Initialization"
    commit id:"7c64e5c feat: added player sprite and walk animation"
    branch stg-3
