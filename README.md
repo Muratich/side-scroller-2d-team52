@@ -31,7 +31,174 @@
    - [Link to kanban board](https://miro.com/app/board/uXjVIrXDYK0=/)
    - Workflow:
       - As a base workflow we use GitHub Flow, since we have one "main" and for each sprint we create separate branch and pull requests further.
-      - ![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/.github/workflows/gitgrapg.png)
+      - @startuml
+!theme plain
+
+' Main classes and relationships
+class CameraFollow {
+  + float followSpeed
+  + float yOffset
+  + float zOffset
+  + bool isMoving
+  + void LateUpdate()
+  + void SetTarget(Transform)
+}
+
+class SpawnEffect {
+  + Transform origin
+  + GameObject effect
+  + float lifetime
+  + void Spawn()
+}
+
+class WhiteShade {
+  + SpriteRenderer spriteRenderer
+  + Color shadeColor
+  + void Shade()
+  + IEnumerator ShadeCor()
+}
+
+class Enemy <<NetworkBehaviour>> {
+  + Health health
+  + void EnemyDestroyLocal()
+  + void RequestDespawnServerRpc()
+}
+
+abstract class EnemyAttack <<NetworkBehaviour>> {
+  + Animator animator
+  + float attackReload
+  + Transform attackPos
+  + void StartAttackServerRpc(Vector3)
+  + void StopAttackServerRpc()
+  + void UpdateTargetPositionServerRpc(Vector3)
+  + {abstract} void StartAttack(Vector3)
+  + {abstract} void StopAttack()
+}
+
+class EnemyAttackMelee {
+  + GameObject hitZone
+  + IEnumerator HitLoop()
+}
+
+class EnemyAttackRange {
+  + GameObject bulletPrefab
+  + float bulletSpeed
+  + IEnumerator Fire()
+}
+
+class EnemyPatternMovement <<NetworkBehaviour>> {
+  + List<Transform> destinationPoints
+  + float speed
+  + float timeToStayAtPoint
+  + bool isDasher
+  + void Init(List<Transform>)
+  + IEnumerator Movement()
+  + IEnumerator DashTo(Vector3)
+}
+
+class ViewZone <<NetworkBehaviour>> {
+  + float viewRadius
+  + float viewAngle
+  + Transform enemyObj
+  + EnemyAttack enemyAttack
+  + void CheckVisibleTargets()
+  + Transform GetClosestVisibleTarget()
+}
+
+class Health <<NetworkBehaviour>> {
+  + int startHealth
+  + NetworkVariable<int> CurrentHealth
+  + void TakeDamageServerRpc(int)
+  + void HealServerRpc(int)
+  + IEnumerator Invincibility()
+}
+
+class Weapon <<NetworkBehaviour>> {
+  + float reloadTime
+  + Transform firePos
+  + GameObject proj
+  + Transform target
+  + Transform scaleRef
+  + {abstract} void Attack()
+}
+
+class SniperWeapon {
+  + float bulletSpeed
+  + IEnumerator Reload()
+  + IEnumerator DeleteBullet(NetworkObject)
+}
+
+class SwordWeapon {
+  + IEnumerator Reload()
+  + IEnumerator DeleteBullet(NetworkObject)
+}
+
+class Movement <<NetworkBehaviour>> {
+  + bool control
+  + float speed
+  + Rigidbody2D rb
+  + InputHandler input
+  + void Move()
+  + void Jump()
+  + void GroundCheck()
+}
+
+class WeaponManager <<NetworkBehaviour>> {
+  + Transform holdPoint
+  + Weapon currentWeapon
+  + void TryPickup(PickUpWeapon)
+  + void ExecuteAttack()
+}
+
+class LobbyManager {
+  + GameObject menuPanel
+  + GameObject lobbyPanel
+  + void OnHostButtonClicked()
+  + void OnClientButtonClicked()
+  + void Singleplayer()
+}
+
+' Inheritance relationships
+EnemyAttack <|-- EnemyAttackMelee
+EnemyAttack <|-- EnemyAttackRange
+Weapon <|-- SniperWeapon
+Weapon <|-- SwordWeapon
+
+' Composition relationships
+CameraFollow "1" *-- "1" Transform
+Enemy "1" *-- "1" Health
+EnemyPatternMovement "1" *-- "1" ViewZone
+ViewZone "1" *-- "1" EnemyAttack
+Health "1" *-- "n" UnityEvent
+Movement "1" *-- "1" InputHandler
+Movement "1" *-- "1" WeaponManager
+WeaponManager "1" *-- "1" Weapon
+LobbyManager "1" *-- "1" UnityTransport
+
+' Association relationships
+EnemyPatternMovement "1" --> "n" Transform : destinationPoints
+ViewZone "1" --> "n" Transform : tracks targets
+WeaponManager "1" --> "1" PickUpWeapon
+SpawnEffect "1" --> "1" GameObject : spawns
+WhiteShade "1" --> "1" SpriteRenderer : affects
+
+' Network-related notes
+note top of Enemy
+  Uses NetworkBehaviour
+  for multiplayer sync
+end note
+
+note top of Health
+  NetworkVariable for
+  health synchronization
+end note
+
+note bottom of WeaponManager
+  Spawns weapons over network
+  with ownership management
+end note
+
+@enduml
       - Git workflow rules
          - each contributor can create and close issues
          - issues must include acceptance criteria, priority and story points (as labels)
