@@ -3,8 +3,6 @@ using Unity.Netcode;
 using UnityEngine;
 
 public class PuzzleManager : NetworkBehaviour {
-    public List<GameObject> puzzlesPrefabs = new();
-    [HideInInspector] public List<int> alreadyTakenPuzzlesIndexes = new();
     private bool puzzleStarted = false;
     private GameObject gates;
 
@@ -12,7 +10,7 @@ public class PuzzleManager : NetworkBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Activate(GameObject gates, Vector3 teleportPos) {
+    public void Activate(GameObject gates, Vector3 teleportPos, GameObject prefab) {
         if (gates == null) { Debug.Log("Gates not given!"); return; }
         if (!IsServer || puzzleStarted) return;
         puzzleStarted = true;
@@ -23,10 +21,7 @@ public class PuzzleManager : NetworkBehaviour {
         var gateRef = new NetworkObjectReference(gates.GetComponent<NetworkObject>());
         ActivateClientRpc(gateRef, teleportPos);
 
-        int randPuzzle = PickUpRandomPuzzle();
-        if (randPuzzle == -1) return;
-
-        GameObject puzzleWindow = Instantiate(puzzlesPrefabs[randPuzzle]);
+        GameObject puzzleWindow = Instantiate(prefab);
         var netObj = puzzleWindow.GetComponent<NetworkObject>();
         netObj.Spawn(destroyWithScene: true);
 
@@ -46,17 +41,6 @@ public class PuzzleManager : NetworkBehaviour {
                 mover.transform.position = teleportPos;
                 if (mover.rb != null) mover.rb.linearVelocity = Vector2.zero;
             }
-        }
-    }
-
-    public int PickUpRandomPuzzle() {
-        if (puzzlesPrefabs == null || puzzlesPrefabs.Count == 0 || puzzlesPrefabs.Count <= alreadyTakenPuzzlesIndexes.Count) { Debug.LogError("Puzzle not set in PuzzleManager!"); return -1; }
-
-        int randInd = Random.Range(0, puzzlesPrefabs.Count);
-        if (alreadyTakenPuzzlesIndexes.Contains(randInd)) return PickUpRandomPuzzle();
-        else {
-            alreadyTakenPuzzlesIndexes.Add(randInd);
-            return randInd;
         }
     }
 
