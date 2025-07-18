@@ -20,7 +20,7 @@ public class InGameProfile : NetworkBehaviour
                 playerName.Value = new NetworkString(profile.GetPlayerName());
             }
             else {
-                Debug.LogWarning("Profile не найден в сцене!");
+                Debug.LogWarning("Profile does not founded on scene!");
             }
         }
         SetNameForPlayer(playerName.Value.Value);

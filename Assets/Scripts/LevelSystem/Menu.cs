@@ -17,22 +17,21 @@ public class Menu : MonoBehaviour {
     public TMP_InputField newPlayerNameField;
 
     void Start() {
-        float value = 1f;
-        if (PlayerPrefs.HasKey("MusicVolume")) value = PlayerPrefs.GetFloat("MusicVolume");
-        masterMixer.SetFloat("MusicVolume", value);
+        Screen.fullScreen = false;
+        float sliderValue = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        float dB = Mathf.Lerp(-80f, 0f, sliderValue);
+
+        masterMixer.SetFloat("MusicVolume", dB);
+
         slider.onValueChanged.RemoveAllListeners();
-        slider.value = value;
+        slider.minValue = 0f;
+        slider.maxValue = 1f;
+        slider.value = sliderValue;
 
         slider.onValueChanged.AddListener(SetMasterVolume);
-
         profile.UpdateValues();
         playerName.text = profile.GetPlayerName();
         maxReachedLevel.text = profile.GetMaxReachedLevel().ToString();
-    }
-
-    public void MakeFullscreen() {
-        Screen.fullScreen = true;
-        Screen.SetResolution(1920, 1080, true);
     }
 
     public void ClearProgress() {
@@ -40,12 +39,14 @@ public class Menu : MonoBehaviour {
         playerName.text = profile.GetPlayerName();
         maxReachedLevel.text = profile.GetMaxReachedLevel().ToString();
     }
-
-    public void SetMasterVolume(float value) {
-        masterMixer.SetFloat("MusicVolume", value);
-        PlayerPrefs.SetFloat("MusicVolume", value);
+    public void SetMasterVolume(float sliderValue) {
+        float dB = Mathf.Lerp(-80f, 0f, sliderValue);
+        Debug.Log($"[Audio] Slider={sliderValue:F2} → dB={dB:F1}");  // вот это
+        masterMixer.SetFloat("MusicVolume", dB);
+        PlayerPrefs.SetFloat("MusicVolume", sliderValue);
         PlayerPrefs.Save();
     }
+
 
     public void SetNewPlayerName() {
         profile.SetPlayerName(newPlayerNameField.text);
