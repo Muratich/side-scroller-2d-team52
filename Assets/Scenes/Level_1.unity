@@ -47809,7 +47809,7 @@ Transform:
   m_GameObject: {fileID: 1435859995}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 28, y: -1.8, z: 0}
+  m_LocalPosition: {x: -1.92, y: -1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47854,7 +47854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   puzzleManager: {fileID: 1669883825}
-  puzzle: {fileID: 3514823957674356162, guid: b6942b943cbff3747ad9f0fde59a3178, type: 3}
+  puzzle: {fileID: 2875825311578874266, guid: 6d0362cf2441c3f4b8fbc739885d4e17, type: 3}
   gates: {fileID: 803379300}
 --- !u!61 &1435859999
 BoxCollider2D:
