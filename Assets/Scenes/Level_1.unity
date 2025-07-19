@@ -47854,7 +47854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   puzzleManager: {fileID: 1669883825}
-  puzzle: {fileID: 2875825311578874266, guid: 6d0362cf2441c3f4b8fbc739885d4e17, type: 3}
+  puzzle: {fileID: 7030301465925479706, guid: 42b139666d0cace419ed2526337844d3, type: 3}
   gates: {fileID: 803379300}
 --- !u!61 &1435859999
 BoxCollider2D:
