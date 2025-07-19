@@ -116,12 +116,17 @@ public class SimonSays : Puzzle {
             }
         } else {
             HighlightButtonClientRpc(index, false);
-            sequence.Clear();
-            AddRandomToSequence();
-            inputIndex = 0;
-            currentPlayer.Value = 0;
-            SendSequenceToClients();
+            StartCoroutine(ResetSequenceAfterDelay());
         }
+    }
+
+    private IEnumerator ResetSequenceAfterDelay() {
+        yield return new WaitForSeconds(highlightDuration/2+0.1f);
+        sequence.Clear();
+        AddRandomToSequence();
+        inputIndex = 0;
+        currentPlayer.Value = 0;
+        SendSequenceToClients();
     }
 
     [ClientRpc]
