@@ -109,6 +109,15 @@ gitGraph
 #### Quality attribute scenarios
 ![Link to the quality attribute scenarios documentation](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/quality-assurance/quality-attribute-scenarios.md)
 
+How we achieved them?
+   * **Network Crash Recovery:** We implemented real‑time state serialization that snapshots player and boss data every second and seamlessly reloads it on reconnection, alongside a built‑in reconnection UI that restores the session within 10 seconds.
+   * **Progress Corruption Recovery:** We maintain rolling backup saves with MD5 checksums and an auto‑repair routine that detects corruption and swaps in the last valid backup to ensure ≤1 backup loss.
+   * **Cross‑Platform Installation:** We packaged the game as a single, self‑contained executable with an installer that auto‑detects and installs all dependencies across Windows, macOS, and Linux in under 60 seconds.
+   * **Storage Optimization:** We built a dynamic asset loader that downscales textures and offers optional HD asset packs to keep the total installation footprint below 1.5 GB.
+   * **Cross‑Device LAN Play:** We use Unity’s network transport with adaptive resolution scaling, input latency buffering, and version‑match verification to guarantee sub‑50 ms latency and 99% frame sync between Windows and macOS clients.
+   * **Peripheral Compatibility:** We leverage the Unity Input System’s device hot‑swap and control‑scheme profiles to auto‑detect controllers and keyboards, allowing instant rebinding and UI updates with zero input conflicts.
+
+
 #### Automated tests
 The tests were conducted using the Unity Test Framework (UTF). 10 tests were written affecting different game mechanics (from the camera to the player's spawner). All tests are written in C# and are located in the Assets/Tests folder.
 #### Tools Used
