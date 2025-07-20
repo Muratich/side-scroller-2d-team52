@@ -337,7 +337,9 @@ MonoBehaviour:
   myCameraFollow: {fileID: 0}
   healthUI: {fileID: 0}
   healthUIPrefab: {fileID: 1059374936457149010, guid: 4e0ed0ef0e0786f49aad3b5b5d893d09, type: 3}
-  paralaxPrefab: {fileID: 2481891452401420464, guid: 336d0df6fa422af4297baac9c95a51ab, type: 3}
+  paralaxPrefab_Level1: {fileID: 2481891452401420464, guid: 336d0df6fa422af4297baac9c95a51ab, type: 3}
+  paralaxPrefab_Level2: {fileID: 2481891452401420464, guid: 8b4ce649b39e2b24ba931f13b4668112, type: 3}
+  paralaxPrefab_Level3: {fileID: 2481891452401420464, guid: 48bf7365686f531479ed784309a91888, type: 3}
   takeWeaponInterval: 0.1
 --- !u!114 &3028687879752967258
 MonoBehaviour:

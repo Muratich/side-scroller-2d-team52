@@ -183,7 +183,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: ba278135405906d458d9e813a203ba2e, type: 3}
   m_Color: {r: 0.4627451, g: 0.6431373, b: 0.7058824, a: 1}
   m_FlipX: 1
@@ -306,13 +306,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  destinationPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  speed: 5
-  timeToStayAtPoint: 2
+  destinationPoints: []
+  speed: 12
+  timeToStayAtPoint: 1
   isDasher: 0
   dashSpeed: 20
   dashTime: 1
@@ -333,7 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   animator: {fileID: 7361631085288405772}
-  attackReload: 5
+  attackReload: 3
   attackPos: {fileID: 2128265118048174524}
   hitZone: {fileID: 3359273986785628326, guid: 31b3cbc7304aba248b2c6f5cee315493, type: 3}
 --- !u!95 &7361631085288405772
@@ -346,7 +342,7 @@ Animator:
   m_GameObject: {fileID: 1602361522707910691}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9ac5f5d2a70d1064b80ac5732c88efc3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0c28c545b3c27bf499006024bcd39ca9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -432,7 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  startHealth: 35
+  startHealth: 25
   onDamage:
     m_PersistentCalls:
       m_Calls:
@@ -498,6 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   health: {fileID: 7052783485163211396}
+  animator: {fileID: 7361631085288405772}
 --- !u!114 &913879341688779502
 MonoBehaviour:
   m_ObjectHideFlags: 0
