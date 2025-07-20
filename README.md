@@ -6,6 +6,10 @@
 📍 ![Install game](https://marat-diyarov.itch.io/summer-project-2025-team-52)
 
 ▶️ ![Demo video](https://drive.google.com/file/d/12WhGG4Ikv21sZW23Yg7ozpP4KMjqLsd_/view?usp=sharing)
+Screenshots:
+![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/screenshots/Screenshot_1.png)
+![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/screenshots/Screenshot_2.png)
+![](https://github.com/Muratich/side-scroller-2d-team52/blob/master/docs/screenshots/Screenshot_3.png)
 
 ## Product
 💥 The goal of our project is to create a new 2D multiplayer side-scrolling game for customers, with all the necessary features.
