@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : NetworkBehaviour {
     [HideInInspector] public bool control; // Variable for pauses/cutscenes (turn on/off) movement
@@ -46,7 +47,9 @@ public class Movement : NetworkBehaviour {
     [HideInInspector] public CameraFollow myCameraFollow;
     [HideInInspector] public HealthUI healthUI;
     public GameObject healthUIPrefab;
-    public GameObject paralaxPrefab;
+    public GameObject paralaxPrefab_Level1;
+    public GameObject paralaxPrefab_Level2;
+    public GameObject paralaxPrefab_Level3;
 
     [Header("Pick up weapons")]
     [SerializeField] private float takeWeaponInterval = 0.1f;
@@ -68,9 +71,16 @@ public class Movement : NetworkBehaviour {
             healthUI = Instantiate(healthUIPrefab, Vector3.zero, Quaternion.identity).GetComponent<HealthUI>();
             healthUI.Init(health);
 
-            if (paralaxPrefab == null) { Debug.Log("Paralax not set!"); return; }
+            if (paralaxPrefab_Level1 == null || paralaxPrefab_Level2 == null || paralaxPrefab_Level3 == null) { Debug.Log("Paralax not set!"); return; }
 
-            GameObject paralaxObj = Instantiate(paralaxPrefab, transform.position, Quaternion.identity);
+            GameObject paralaxObj;
+            if (SceneManager.GetActiveScene().buildIndex == 3) {
+                paralaxObj = Instantiate(paralaxPrefab_Level3, transform.position, Quaternion.identity);
+                jumpVelocity *= 1.5f;
+            } else if (SceneManager.GetActiveScene().buildIndex == 2)
+                paralaxObj = Instantiate(paralaxPrefab_Level2, transform.position, Quaternion.identity);
+            else
+                paralaxObj = Instantiate(paralaxPrefab_Level1, transform.position, Quaternion.identity);
             foreach (SimpleParallaxScroller sp in paralaxObj.GetComponentsInChildren<SimpleParallaxScroller>()) {
                 sp.Init(cam.GetComponent<Camera>());
             }

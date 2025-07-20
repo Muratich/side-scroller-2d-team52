@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  viewRadius: 10
+  viewRadius: 25
   viewAngle: 359
   targetMask:
     serializedVersion: 2
@@ -183,8 +183,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e9b8e1622b3cc314396f4721ffd35a66, type: 3}
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 5625880864584456537, guid: a799934eb4fee4a46bcd15f9fdab0ff1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -260,13 +260,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 0.8675, y: 2.0675}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &-214466813311987268
 MonoBehaviour:
@@ -306,11 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  destinationPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  destinationPoints: []
   speed: 15
   timeToStayAtPoint: 1
   isDasher: 0
@@ -329,7 +325,7 @@ Animator:
   m_GameObject: {fileID: 1602361522707910691}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9ac5f5d2a70d1064b80ac5732c88efc3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 78c1d039fb16a4a48bb5b7a4b2df2071, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -484,6 +480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   health: {fileID: 8770901439195514026}
+  animator: {fileID: 7361631085288405772}
 --- !u!114 &34913074077376750
 MonoBehaviour:
   m_ObjectHideFlags: 0
